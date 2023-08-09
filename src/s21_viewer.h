@@ -5,6 +5,8 @@
 
 enum { S21_OK, S21_ERR, S21_MEM };
 
+#define PI 3.14159265358979323846
+
 typedef struct {
   uint32_t *vertexes;
   uint32_t count;
@@ -24,5 +26,12 @@ typedef struct {
 
 int s21_parse_obj_file(char *filename, s21_obj *data);
 void s21_free_obj_struct(s21_obj *data);
+
+void s21_xyz_movement(s21_matrix_t *dot_matrix, double ax, double ay,
+                      double az);
+void s21_rotation_by_ox(s21_matrix_t *dot_matrix, double angle);
+void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle);
+void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle);
+void s21_scale(s21_matrix_t *dot_matrix, double k);
 
 #endif  // S21_VIEWER_H

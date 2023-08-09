@@ -11,4 +11,6 @@
 #define PRE_TEST_HEADER "\033[33m**"
 #define POST_TEST_HEADER "**\033[0m"
 
+Suite *s21_viewer_tests(void);
+
 #endif  // S21_VIEWER_TESTS_H
