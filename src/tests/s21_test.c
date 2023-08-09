@@ -24,8 +24,7 @@ START_TEST(viewer_tests_0) {
 END_TEST
 
 START_TEST(viewer_tests_1) {
-  s21_obj data_1 = {0, NULL, NULL};
-  s21_obj data_2 = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL};
   char file[] = "../../models/cube.obj";
 
   double standart[8][3] = {
@@ -33,18 +32,16 @@ START_TEST(viewer_tests_1) {
       {1.0, 0.0, 0.0}, {1.0, -1.0, 0.0}, {1.0, 0.0, 1.0}, {1.0, -1.0, 1.0},
   };
 
-  s21_parse_obj_file(file, &data_1);
-  s21_parse_obj_file(file, &data_2);
-  s21_rotation_by_ox(data_2.matrix_3d, PI / 2);
+  s21_parse_obj_file(file, &data);
+  s21_rotation_by_ox(data.matrix_3d, PI / 2);
 
-  for (uint32_t i = 0; i < data_1.polygons->count; i++) {
+  for (uint32_t i = 0; i < data.polygons->count; i++) {
     for (int j = 0; j < 3; j++) {
-      ck_assert_double_eq_tol(standart[i][j], data_2.matrix_3d->matrix[i][j],
+      ck_assert_double_eq_tol(standart[i][j], data.matrix_3d->matrix[i][j],
                               0.0000001);
     }
   }
-  s21_free_obj_struct(&data_1);
-  s21_free_obj_struct(&data_2);
+  s21_free_obj_struct(&data);
 }
 END_TEST
 
