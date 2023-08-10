@@ -5,8 +5,6 @@
 
 enum { S21_OK, S21_ERR, S21_MEM };
 
-#define PI 3.14159265358979323846
-
 typedef struct {
   uint32_t *vertexes;
   uint32_t count;

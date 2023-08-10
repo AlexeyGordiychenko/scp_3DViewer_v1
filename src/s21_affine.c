@@ -31,7 +31,7 @@ void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle) {
   for (uint32_t i = 0; i < dot_matrix->rows; i++) {
     double temp_x = dot_matrix->matrix[i][0];
     double temp_z = dot_matrix->matrix[i][2];
-    dot_matrix->matrix[i][1] = temp_x * cos(angle) + temp_z * sin(angle);
+    dot_matrix->matrix[i][0] = temp_x * cos(angle) + temp_z * sin(angle);
     dot_matrix->matrix[i][2] = -temp_x * sin(angle) + temp_z * cos(angle);
   }
 }
@@ -40,8 +40,8 @@ void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle) {
   for (uint32_t i = 0; i < dot_matrix->rows; i++) {
     double temp_x = dot_matrix->matrix[i][0];
     double temp_y = dot_matrix->matrix[i][1];
-    dot_matrix->matrix[i][1] = temp_x * cos(angle) - temp_y * sin(angle);
-    dot_matrix->matrix[i][2] = temp_x * sin(angle) + temp_y * cos(angle);
+    dot_matrix->matrix[i][0] = temp_x * cos(angle) - temp_y * sin(angle);
+    dot_matrix->matrix[i][1] = temp_x * sin(angle) + temp_y * cos(angle);
   }
 }
 

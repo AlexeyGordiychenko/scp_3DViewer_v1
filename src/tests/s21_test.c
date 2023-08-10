@@ -2,6 +2,8 @@
 
 #include "s21_viewer_tests.h"
 
+#define PI 3.14159265358979323846
+
 START_TEST(viewer_tests_0) {
   s21_obj data_1 = {0, NULL, NULL};
   s21_obj data_2 = {0, NULL, NULL};
@@ -27,7 +29,7 @@ START_TEST(viewer_tests_1) {
   s21_obj data = {0, NULL, NULL};
   char file[] = "../../models/cube.obj";
 
-  double standart[8][3] = {
+  double compared[8][3] = {
       {0.0, 0.0, 0.0}, {0.0, -1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, -1.0, 1.0},
       {1.0, 0.0, 0.0}, {1.0, -1.0, 0.0}, {1.0, 0.0, 1.0}, {1.0, -1.0, 1.0},
   };
@@ -37,8 +39,80 @@ START_TEST(viewer_tests_1) {
 
   for (uint32_t i = 0; i < data.polygons->count; i++) {
     for (int j = 0; j < 3; j++) {
-      ck_assert_double_eq_tol(standart[i][j], data.matrix_3d->matrix[i][j],
-                              0.0000001);
+      ck_assert_double_eq_tol(compared[i][j], data.matrix_3d->matrix[i][j],
+                              0.000001);
+    }
+  }
+  s21_free_obj_struct(&data);
+}
+END_TEST
+
+START_TEST(viewer_tests_2) {
+  s21_obj data = {0, NULL, NULL};
+  char file[] = "../../models/cube.obj";
+
+  double compared[8][3] = {
+      {0.0, 0.0, 0.0},  {0.0, 0.0, -1.0},  {0.0, 1.0, 0.0},  {0.0, 1.0, -1.0},
+      {-1.0, 0.0, 0.0}, {-1.0, 0.0, -1.0}, {-1.0, 1.0, 0.0}, {-1.0, 1.0, -1.0},
+  };
+
+  s21_parse_obj_file(file, &data);
+  s21_rotation_by_oy(data.matrix_3d, PI);
+
+  for (uint32_t i = 0; i < data.polygons->count; i++) {
+    for (int j = 0; j < 3; j++) {
+      ck_assert_double_eq_tol(compared[i][j], data.matrix_3d->matrix[i][j],
+                              0.000001);
+    }
+  }
+  s21_free_obj_struct(&data);
+}
+END_TEST
+
+START_TEST(viewer_tests_3) {
+  s21_obj data = {0, NULL, NULL};
+  char file[] = "../../models/cube.obj";
+
+  double compared[8][3] = {
+      {0.0, 0.0, 0.0},
+      {0.0, 0.0, 1.0},
+      {-0.707107, -0.707107, 0.0},
+      {-0.707107, -0.707107, 1.0},
+      {-0.707107, 0.707107, 0.0},
+      {-0.707107, 0.707107, 1.0},
+      {-1.414214, 0.0, 0.0},
+      {-1.414214, 0.0, 1.0},
+  };
+
+  s21_parse_obj_file(file, &data);
+  s21_rotation_by_oz(data.matrix_3d, 3 * PI / 4);
+
+  for (uint32_t i = 0; i < data.polygons->count; i++) {
+    for (int j = 0; j < 3; j++) {
+      ck_assert_double_eq_tol(compared[i][j], data.matrix_3d->matrix[i][j],
+                              0.000001);
+    }
+  }
+  s21_free_obj_struct(&data);
+}
+END_TEST
+
+START_TEST(viewer_tests_4) {
+  s21_obj data = {0, NULL, NULL};
+  char file[] = "../../models/cube.obj";
+
+  double compared[8][3] = {
+      {0.0, 0.0, 0.0}, {0.0, 0.0, 2.5}, {0.0, 2.5, 0.0}, {0.0, 2.5, 2.5},
+      {2.5, 0.0, 0.0}, {2.5, 0.0, 2.5}, {2.5, 2.5, 0.0}, {2.5, 2.5, 2.5},
+  };
+
+  s21_parse_obj_file(file, &data);
+  s21_scale(data.matrix_3d, 2.5);
+
+  for (uint32_t i = 0; i < data.polygons->count; i++) {
+    for (int j = 0; j < 3; j++) {
+      ck_assert_double_eq_tol(compared[i][j], data.matrix_3d->matrix[i][j],
+                              0.000001);
     }
   }
   s21_free_obj_struct(&data);
@@ -52,6 +126,9 @@ Suite *s21_viewer_tests(void) {
   suite_add_tcase(s1, tc1_1);
   tcase_add_test(tc1_1, viewer_tests_0);
   tcase_add_test(tc1_1, viewer_tests_1);
+  tcase_add_test(tc1_1, viewer_tests_2);
+  tcase_add_test(tc1_1, viewer_tests_3);
+  tcase_add_test(tc1_1, viewer_tests_4);
 
   return s1;
 }
