@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui opengl openglwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,10 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    s21_glwidget.cpp \
+    s21_parser.c
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    s21_glwidget.h \
+    s21_viewer.h
 
 FORMS += \
     mainwindow.ui
