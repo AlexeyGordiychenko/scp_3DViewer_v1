@@ -157,6 +157,24 @@ START_TEST(viewer_tests_7) {
 }
 END_TEST
 
+START_TEST(viewer_tests_8) {
+  s21_obj data = {0, NULL, NULL};
+  char file[] = "../../models/flowers.obj";
+
+  s21_parse_obj_file(file, &data);
+  ck_assert_int_eq(data.polygons_count, 4061);
+  s21_free_obj_struct(&data);
+}
+END_TEST
+
+START_TEST(viewer_tests_9) {
+  s21_obj data = {0, NULL, NULL};
+  char file[] = "../../models/cube1.obj";
+  int res = s21_parse_obj_file(file, &data);
+  ck_assert_int_eq(res, 1);
+}
+END_TEST
+
 Suite *s21_viewer_tests(void) {
   Suite *s1 = suite_create(PRE_TEST_HEADER "S21_VIEWER" POST_TEST_HEADER);
   TCase *tc1_1 = tcase_create("S21_VIEWER");
@@ -170,6 +188,8 @@ Suite *s21_viewer_tests(void) {
   tcase_add_test(tc1_1, viewer_tests_5);
   tcase_add_test(tc1_1, viewer_tests_6);
   tcase_add_test(tc1_1, viewer_tests_7);
+  tcase_add_test(tc1_1, viewer_tests_8);
+  tcase_add_test(tc1_1, viewer_tests_9);
 
   return s1;
 }
