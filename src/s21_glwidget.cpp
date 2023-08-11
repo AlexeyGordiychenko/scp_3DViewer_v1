@@ -48,7 +48,11 @@ void GLWidget::initializeGL() {
   glEnable(GL_DEPTH_TEST);
 }
 
-void GLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
+void GLWidget::resizeGL(int w, int h) {
+  this->sizeH = h;
+  this->sizeW = w;
+  glViewport(0, 0, w, h);
+}
 
 void GLWidget::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -100,9 +104,9 @@ void normalizeAngle(double &angle) {
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
   GLfloat dx =
-      GLfloat(event->position().x() - this->lastMousePos.x()) / width();
+      GLfloat(event->position().x() - this->lastMousePos.x()) / this->sizeW;
   GLfloat dy =
-      GLfloat(event->position().y() - this->lastMousePos.y()) / height();
+      GLfloat(event->position().y() - this->lastMousePos.y()) / this->sizeH;
 
   if (event->buttons() & Qt::LeftButton) {
     this->xRot += 360 * dy;
