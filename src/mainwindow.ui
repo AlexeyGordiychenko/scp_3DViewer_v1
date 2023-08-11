@@ -54,13 +54,23 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>50</y>
+      <y>90</y>
       <width>751</width>
-      <height>491</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="projectionType">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>50</y>
+      <width>103</width>
+      <height>28</height>
+     </rect>
     </property>
    </widget>
   </widget>

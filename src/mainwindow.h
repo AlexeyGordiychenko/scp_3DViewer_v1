@@ -25,5 +25,6 @@ class MainWindow : public QMainWindow {
  private slots:
   void s21_openFile();
   void s21_renderFile();
+  void s21_projectionTypeChange(int idx);
 };
 #endif  // MAINWINDOW_H

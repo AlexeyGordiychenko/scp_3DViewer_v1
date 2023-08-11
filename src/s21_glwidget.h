@@ -14,19 +14,22 @@ extern "C" {
 #include "s21_viewer.h"
 }
 
+enum s21_projectionType { PARALLEL, CENTRAL };
+
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   char *filename;
   void setFilename(char *filename);
+  void setProjectionType(int idx);
   void parseFile();
 
  private:
   ~GLWidget() override;
   s21_obj *data = NULL;
-  GLdouble viewBoxCoef = 0;
-  bool test = false;
-  void setViewBoxCoef();
+  int sizeH = 0, sizeW = 0, projectionType = 0;
+  double centerX, centerY, centerZ, sizeCoefficient;
+  void setDimentionalValues();
 
  protected:
   // OPENGL
