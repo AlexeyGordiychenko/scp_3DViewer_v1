@@ -90,7 +90,7 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::mousePressEvent(QMouseEvent *event) {
-  lastMousePos = event->position();
+  this->lastMousePos = event->position();
 }
 
 void normalizeAngle(double &angle) {
@@ -99,25 +99,27 @@ void normalizeAngle(double &angle) {
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
-  GLfloat dx = GLfloat(event->position().x() - lastMousePos.x()) / width();
-  GLfloat dy = GLfloat(event->position().y() - lastMousePos.y()) / height();
+  GLfloat dx =
+      GLfloat(event->position().x() - this->lastMousePos.x()) / width();
+  GLfloat dy =
+      GLfloat(event->position().y() - this->lastMousePos.y()) / height();
 
   if (event->buttons() & Qt::LeftButton) {
-    xRot += 360 * dy;
-    yRot += 360 * dx;
-    normalizeAngle(xRot);
-    normalizeAngle(yRot);
+    this->xRot += 360 * dy;
+    this->yRot += 360 * dx;
+    normalizeAngle(this->xRot);
+    normalizeAngle(this->yRot);
   } else if (event->buttons() & Qt::RightButton) {
-    xRot += 360 * dy;
-    zRot += 360 * dx;
-    normalizeAngle(xRot);
-    normalizeAngle(zRot);
+    this->xRot += 360 * dy;
+    this->zRot += 360 * dx;
+    normalizeAngle(this->xRot);
+    normalizeAngle(this->zRot);
   } else if (event->buttons() & Qt::MiddleButton) {
-    xTrans += dx;
-    yTrans -= dy;
+    this->xTrans += dx;
+    this->yTrans -= dy;
   }
 
-  lastMousePos = event->position();
+  this->lastMousePos = event->position();
   update();
 }
 
@@ -128,9 +130,9 @@ void GLWidget::wheelEvent(QWheelEvent *event) {
     int delta = angleDelta.y();
 
     if (delta > 0) {
-      zoom *= 1.1;
+      this->zoom *= 1.1;
     } else {
-      zoom /= 1.1;
+      this->zoom /= 1.1;
     }
     update();
   }
