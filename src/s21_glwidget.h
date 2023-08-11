@@ -28,7 +28,9 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   ~GLWidget() override;
   s21_obj *data = NULL;
   int sizeH = 0, sizeW = 0, projectionType = 0;
-  double centerX, centerY, centerZ, sizeCoefficient;
+  double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
+         yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
+  QPointF lastMousePos;
   void setDimentionalValues();
 
  protected:
@@ -36,6 +38,9 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void initializeGL() override;
   void paintGL() override;
   void resizeGL(int w, int h) override;
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+  void wheelEvent(QWheelEvent *event) override;
 };
 
 #endif

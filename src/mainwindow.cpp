@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->renderFile, SIGNAL(clicked()), this, SLOT(s21_renderFile()));
   connect(ui->projectionType, SIGNAL(currentIndexChanged(int)), this,
           SLOT(s21_projectionTypeChange(int)));
+
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
 }

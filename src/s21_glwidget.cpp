@@ -62,7 +62,11 @@ void GLWidget::paintGL() {
       glFrustum(-1, 1, -1, 1, 1, 99999);
       glTranslatef(0, 0, -2.5);
     }
-    // glRotatef(30, 1 / M_PI * 2, 1 / M_PI * 2, 0);
+    glScalef(this->zoom, this->zoom, this->zoom);
+    glTranslatef(this->xTrans, this->yTrans, 0.0);
+    glRotatef(this->xRot / 4.0, 1.0, 0.0, 0.0);
+    glRotatef(this->yRot / 4.0, 0.0, 1.0, 0.0);
+    glRotatef(this->zRot / 4.0, 0.0, 0.0, 1.0);
 
     for (uint32_t i = 0; i < this->data->polygons_count; i++) {
       glBegin(GL_LINE_LOOP);
@@ -82,5 +86,52 @@ void GLWidget::paintGL() {
       glEnd();
     }
     glFlush();
+  }
+}
+
+void GLWidget::mousePressEvent(QMouseEvent *event) {
+  lastMousePos = event->position();
+}
+
+void normalizeAngle(double &angle) {
+  while (angle < 0) angle += 360 * 16;
+  while (angle > 360) angle -= 360 * 16;
+}
+
+void GLWidget::mouseMoveEvent(QMouseEvent *event) {
+  GLfloat dx = GLfloat(event->position().x() - lastMousePos.x()) / width();
+  GLfloat dy = GLfloat(event->position().y() - lastMousePos.y()) / height();
+
+  if (event->buttons() & Qt::LeftButton) {
+    xRot += 360 * dy;
+    yRot += 360 * dx;
+    normalizeAngle(xRot);
+    normalizeAngle(yRot);
+  } else if (event->buttons() & Qt::RightButton) {
+    xRot += 360 * dy;
+    zRot += 360 * dx;
+    normalizeAngle(xRot);
+    normalizeAngle(zRot);
+  } else if (event->buttons() & Qt::MiddleButton) {
+    xTrans += dx;
+    yTrans -= dy;
+  }
+
+  lastMousePos = event->position();
+  update();
+}
+
+void GLWidget::wheelEvent(QWheelEvent *event) {
+  QPoint angleDelta = event->angleDelta();
+
+  if (!angleDelta.isNull()) {
+    int delta = angleDelta.y();
+
+    if (delta > 0) {
+      zoom *= 1.1;
+    } else {
+      zoom /= 1.1;
+    }
+    update();
   }
 }
