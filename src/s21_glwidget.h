@@ -1,9 +1,9 @@
 #ifndef S21_GLWIDGET_H
 #define S21_GLWIDGET_H
 
-#define GL_SILENCE_DEPRECATION
-#include <GL/gl.h>
-#include <GL/glut.h>
+//#define GL_SILENCE_DEPRECATION
+//#include <GL/gl.h>
+//#include <GL/glut.h>
 
 #include <QOpenGLWidget>
 #include <QWidget>
