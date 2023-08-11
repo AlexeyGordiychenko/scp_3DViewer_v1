@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define S21_MATRIX_COLS 3
+
 enum { S21_OK, S21_ERR, S21_MEM };
 
 typedef struct {
@@ -20,6 +22,7 @@ typedef struct {
   uint32_t polygons_count;
   s21_polygon_t *polygons;
   s21_matrix_t *matrix_3d;
+  double viewbox[S21_MATRIX_COLS * 2];  // min_x, max_x...min_z, max_z
 } s21_obj;
 
 int s21_parse_obj_file(char *filename, s21_obj *data);

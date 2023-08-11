@@ -1,10 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "s21_viewer.h"
-
-#define S21_MATRIX_COLS 3
 
 static long s21_get_file_size(FILE *fp) {
   fseek(fp, 0, SEEK_END);
@@ -29,6 +28,16 @@ static bool s21_is_line_to_process(FILE *fp, char c) {
   return fscanf(fp, format, &tmp) == 1 && tmp == ' ';
 }
 
+static void s21_calculate_min_max_coords(s21_obj *data, uint32_t v_count) {
+  double *curr_row = data->matrix_3d->matrix[v_count - 1];
+  if (data->viewbox[0] > curr_row[0]) data->viewbox[0] = curr_row[0];
+  if (data->viewbox[1] < curr_row[0]) data->viewbox[1] = curr_row[0];
+  if (data->viewbox[2] > curr_row[1]) data->viewbox[2] = curr_row[1];
+  if (data->viewbox[3] < curr_row[1]) data->viewbox[3] = curr_row[1];
+  if (data->viewbox[4] > curr_row[2]) data->viewbox[4] = curr_row[2];
+  if (data->viewbox[5] < curr_row[2]) data->viewbox[5] = curr_row[2];
+}
+
 static int s21_allocate_obj_struct(s21_obj **data, uint32_t v_size,
                                    uint32_t f_size) {
   int res = v_size + f_size;
@@ -51,6 +60,7 @@ static int s21_allocate_obj_struct(s21_obj **data, uint32_t v_size,
   (*data)->polygons_count = 0;
   if (polygons) (*data)->polygons->count = 0;
 
+  memset((*data)->viewbox, 0, sizeof(double) * S21_MATRIX_COLS * 2);
   return res;
 }
 
@@ -195,6 +205,7 @@ int s21_parse_obj_file(char *filename, s21_obj *data) {
   while (res == S21_OK && !feof(fp)) {
     if (s21_is_line_to_process(fp, 'v')) {
       res = s21_parse_v(fp, &v_count, &v_size, &data->matrix_3d->matrix);
+      if (res == S21_OK) s21_calculate_min_max_coords(data, v_count);
     } else if (s21_is_line_to_process(fp, 'f')) {
       res = s21_parse_f(fp, v_count, &f_count, &f_size, &data->polygons);
     } else {
