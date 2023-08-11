@@ -73,6 +73,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="getScreenshot">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>107</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Screenshot</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

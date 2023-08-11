@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->renderFile, SIGNAL(clicked()), this, SLOT(s21_renderFile()));
   connect(ui->projectionType, SIGNAL(currentIndexChanged(int)), this,
           SLOT(s21_projectionTypeChange(int)));
+  connect(ui->getScreenshot, SIGNAL(clicked()), this,
+          SLOT(s21_takeScreenshot()));
 
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
@@ -31,4 +33,33 @@ void MainWindow::s21_renderFile() {
 void MainWindow::s21_projectionTypeChange(int idx) {
   ui->openGLWidget->setProjectionType(idx);
   ui->openGLWidget->update();
+}
+
+void MainWindow::s21_takeScreenshot() {
+  const QString suffixJpeg = ".jpeg", suffixBmp = ".bmp",
+                filterJpeg = "JPEG Image (*." + suffixJpeg + ")",
+                filterBmp = "Bitmap Image (*." + suffixBmp + ")";
+  QFileInfo fileInfo(ui->filePath->text());
+  QFileDialog saveImageDialog(this);
+  QString saveFilename =
+      fileInfo.baseName() + " render " +
+      QDateTime::currentDateTime().toString("yyyy-MM-dd hh.mm.ss") + suffixJpeg;
+  QString selectedFilter;
+  QString image_name = saveImageDialog.getSaveFileName(
+      this, "Screenshot saving", saveFilename, filterJpeg + ";;" + filterBmp,
+      &selectedFilter);
+  if (image_name.length() > 0) {
+    if (!image_name.endsWith(suffixJpeg, Qt::CaseInsensitive) &&
+        !image_name.endsWith(suffixBmp, Qt::CaseInsensitive)) {
+      if (selectedFilter == filterJpeg) {
+        image_name += suffixJpeg;
+      } else {
+        image_name += suffixBmp;
+      }
+    }
+    QImage img = ui->openGLWidget->grabFramebuffer();
+    img.save(image_name);
+    QMessageBox messageBoxImage;
+    messageBoxImage.information(0, "", "Screenshot saved successfully.");
+  }
 }

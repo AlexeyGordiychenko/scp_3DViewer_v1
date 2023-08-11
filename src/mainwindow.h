@@ -5,6 +5,7 @@
 
 #include <QFileDialog>
 #include <QMainWindow>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,5 +27,6 @@ class MainWindow : public QMainWindow {
   void s21_openFile();
   void s21_renderFile();
   void s21_projectionTypeChange(int idx);
+  void s21_takeScreenshot();
 };
 #endif  // MAINWINDOW_H
