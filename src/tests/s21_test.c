@@ -5,8 +5,8 @@
 #define PI 3.14159265358979323846
 
 START_TEST(viewer_tests_0) {
-  s21_obj data_1 = {0, NULL, NULL};
-  s21_obj data_2 = {0, NULL, NULL};
+  s21_obj data_1 = {0, NULL, NULL, {0}};
+  s21_obj data_2 = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   s21_parse_obj_file(file, &data_1);
   s21_parse_obj_file(file, &data_2);
@@ -25,7 +25,7 @@ START_TEST(viewer_tests_0) {
 END_TEST
 
 START_TEST(viewer_tests_1) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   double compared[8][3] = {
       {0.0, 0.0, 0.0}, {0.0, -1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, -1.0, 1.0},
@@ -45,7 +45,7 @@ START_TEST(viewer_tests_1) {
 END_TEST
 
 START_TEST(viewer_tests_2) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   double compared[8][3] = {
       {0.0, 0.0, 0.0},  {0.0, 0.0, -1.0},  {0.0, 1.0, 0.0},  {0.0, 1.0, -1.0},
@@ -65,7 +65,7 @@ START_TEST(viewer_tests_2) {
 END_TEST
 
 START_TEST(viewer_tests_3) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   double compared[8][3] = {
       {0.0, 0.0, 0.0},
@@ -91,7 +91,7 @@ START_TEST(viewer_tests_3) {
 END_TEST
 
 START_TEST(viewer_tests_4) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   double compared[8][3] = {
       {0.0, 0.0, 0.0}, {0.0, 0.0, 2.5}, {0.0, 2.5, 0.0}, {0.0, 2.5, 2.5},
@@ -111,7 +111,7 @@ START_TEST(viewer_tests_4) {
 END_TEST
 
 START_TEST(viewer_tests_5) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/model/cube.txt";
   int error = s21_parse_obj_file(file, &data);
   ck_assert_int_eq(error, S21_ERR);
@@ -120,7 +120,7 @@ START_TEST(viewer_tests_5) {
 END_TEST
 
 START_TEST(viewer_tests_6) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   double compared_matrix[8][3] = {
       {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {0.0, 1.0, 1.0},
@@ -139,7 +139,7 @@ START_TEST(viewer_tests_6) {
 END_TEST
 
 START_TEST(viewer_tests_7) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube.txt";
   uint32_t compared_vertex[12][3] = {
       {1, 7, 5}, {1, 3, 7}, {1, 4, 3}, {1, 2, 4}, {3, 8, 7}, {3, 4, 8},
@@ -158,7 +158,7 @@ START_TEST(viewer_tests_7) {
 END_TEST
 
 START_TEST(viewer_tests_8) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/flowers.txt";
 
   s21_parse_obj_file(file, &data);
@@ -168,7 +168,7 @@ START_TEST(viewer_tests_8) {
 END_TEST
 
 START_TEST(viewer_tests_9) {
-  s21_obj data = {0, NULL, NULL};
+  s21_obj data = {0, NULL, NULL, {0}};
   char file[] = "tests/models/cube1.txt";
   int res = s21_parse_obj_file(file, &data);
   ck_assert_int_eq(res, 1);
