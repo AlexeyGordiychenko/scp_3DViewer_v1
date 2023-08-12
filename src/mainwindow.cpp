@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
           SLOT(s21_projectionTypeChange(int)));
   connect(ui->getScreenshot, SIGNAL(clicked()), this,
           SLOT(s21_takeScreenshot()));
+  connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(s21_getGIF()));
 
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
@@ -61,5 +62,20 @@ void MainWindow::s21_takeScreenshot() {
     img.save(image_name);
     QMessageBox messageBoxImage;
     messageBoxImage.information(0, "", "Screenshot saved successfully.");
+  }
+}
+
+void MainWindow::s21_getGIF() {
+  const QString gifExt = ".gif";
+  QFileInfo fileInfo(ui->filePath->text());
+  QFileDialog saveGifDialog(this);
+  QString saveFilename =
+      fileInfo.baseName() + " anim " +
+      QDateTime::currentDateTime().toString("yyyy-MM-dd hh.mm.ss") + gifExt;
+  QString gifName =
+      saveGifDialog.getSaveFileName(this, "GIF saving", saveFilename, gifExt);
+  if (gifName.length() > 0) {
+    GifCreator *gifCreator = new GifCreator(ui->openGLWidget, gifName);
+    gifCreator->createGif();
   }
 }

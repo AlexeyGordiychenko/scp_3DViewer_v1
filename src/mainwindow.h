@@ -7,6 +7,8 @@
 #include <QMainWindow>
 #include <QMessageBox>
 
+#include "s21_gifcreator.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -22,11 +24,13 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
+  GifCreator *gifCreator;
 
  private slots:
   void s21_openFile();
   void s21_renderFile();
   void s21_projectionTypeChange(int idx);
   void s21_takeScreenshot();
+  void s21_getGIF();
 };
 #endif  // MAINWINDOW_H

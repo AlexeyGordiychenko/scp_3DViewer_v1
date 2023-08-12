@@ -86,6 +86,19 @@
      <string>Screenshot</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="getGIF">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>50</y>
+      <width>107</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>GIF</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
