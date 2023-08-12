@@ -15,9 +15,7 @@ void GLWidget::setProjectionType(int projectionType) {
   this->projectionType = projectionType;
 }
 
-void GLWidget::scale(double k) {
-  s21_scale(this->data->matrix_3d, k);
-}
+void GLWidget::scale(double k) { s21_scale(this->data->matrix_3d, k); }
 
 void GLWidget::move(double x, double y, double z) {
   s21_xyz_movement(this->data->matrix_3d, x, y, z);
@@ -28,7 +26,6 @@ void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
   s21_rotation_by_oy(this->data->matrix_3d, angle_y);
   s21_rotation_by_oz(this->data->matrix_3d, angle_z);
 }
-
 
 void GLWidget::setDimentionalValues() {
   double x_min = this->data->viewbox[0], x_max = this->data->viewbox[1],
@@ -93,11 +90,14 @@ void GLWidget::paintGL() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
+  static double aspect_ratio =
+      static_cast<double>(this->sizeW) / static_cast<double>(this->sizeH);
+
   if (this->isParsed) {
     if (this->projectionType == PARALLEL) {
-      glOrtho(-1.5, 1.5, -1.5, 1.5, -2, 1000);
+      glOrtho(-1.5 * aspect_ratio, 1.5 * aspect_ratio, -1.5, 1.5, -2, 1000);
     } else {
-      glFrustum(-1, 1, -1, 1, 1, 99999);
+      glFrustum(-1 * aspect_ratio, 1 * aspect_ratio, -1, 1, 1, 99999);
       glTranslatef(0, 0, -2.5);
     }
     glScalef(this->zoom, this->zoom, this->zoom);
