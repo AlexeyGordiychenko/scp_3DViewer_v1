@@ -13,6 +13,21 @@ void GLWidget::setProjectionType(int projectionType) {
   this->projectionType = projectionType;
 }
 
+void GLWidget::scale(double k) {
+  s21_scale(this->data->matrix_3d, k);
+}
+
+void GLWidget::move(double x, double y, double z) {
+  s21_xyz_movement(this->data->matrix_3d, x, y, z);
+}
+
+void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
+  s21_rotation_by_ox(this->data->matrix_3d, angle_x);
+  s21_rotation_by_oy(this->data->matrix_3d, angle_y);
+  s21_rotation_by_oz(this->data->matrix_3d, angle_z);
+}
+
+
 void GLWidget::setDimentionalValues() {
   double x_min = this->data->viewbox[0], x_max = this->data->viewbox[1],
          y_min = this->data->viewbox[2], y_max = this->data->viewbox[3],

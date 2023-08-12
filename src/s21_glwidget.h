@@ -20,17 +20,20 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   char *filename;
-  s21_obj *data = NULL;
   uint32_t numVertices = 0, numEdges = 0;
   void setFilename(char *filename);
   void setProjectionType(int idx);
   void parseFile();
+  void scale(double scale);
+  void move(double x, double y, double z);
+  void rotate(double angle_x, double angle_y, double angle_z);
 
  private:
   ~GLWidget() override;
   int sizeH = 0, sizeW = 0, projectionType = 0;
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
+  s21_obj *data = NULL;
   QPointF lastMousePos;
   void setDimentionalValues();
   void countVerticesEdges();

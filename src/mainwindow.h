@@ -33,10 +33,7 @@ class MainWindow : public QMainWindow {
   void s21_renderFile();
   void s21_projectionTypeChange(int idx);
   void s21_takeScreenshot();
-  void s21_getGIF();
-  void scale(double scale);
-  void move(double x, double y, double z);
-  void rotate(double angle_x, double angle_y, double angle_z);
+  void s21_getGIF();  
   void s21_affine();
 };
 #endif  // MAINWINDOW_H
