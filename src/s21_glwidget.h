@@ -20,13 +20,13 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   char *filename;
+  s21_obj *data = NULL;
   void setFilename(char *filename);
   void setProjectionType(int idx);
   void parseFile();
 
  private:
   ~GLWidget() override;
-  s21_obj *data = NULL;
   int sizeH = 0, sizeW = 0, projectionType = 0;
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
