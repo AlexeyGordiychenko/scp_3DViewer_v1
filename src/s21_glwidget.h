@@ -19,7 +19,6 @@ enum s21_projectionType { PARALLEL, CENTRAL };
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
-  char *filename;
   uint32_t numVertices = 0, numEdges = 0;
   bool isParsed = false, fileChanged = true;
   void setFilename(char *filename);
@@ -32,6 +31,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 
  private:
   ~GLWidget() override;
+  char *filename;
   int sizeH = 0, sizeW = 0, projectionType = 0;
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
