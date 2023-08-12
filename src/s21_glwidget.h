@@ -21,6 +21,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   char *filename;
   s21_obj *data = NULL;
+  uint32_t numVertices = 0, numEdges = 0;
   void setFilename(char *filename);
   void setProjectionType(int idx);
   void parseFile();
@@ -32,6 +33,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
   QPointF lastMousePos;
   void setDimentionalValues();
+  void countVerticesEdges();
 
  protected:
   // OPENGL

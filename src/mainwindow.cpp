@@ -30,6 +30,8 @@ void MainWindow::s21_renderFile() {
   std::string std_filename = ui->filePath->text().toStdString();
   ui->openGLWidget->setFilename((char *)std_filename.c_str());
   ui->openGLWidget->parseFile();
+  ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
+  ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
 }
 
 void MainWindow::s21_projectionTypeChange(int idx) {

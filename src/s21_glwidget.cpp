@@ -30,6 +30,16 @@ void GLWidget::setDimentionalValues() {
   }
 }
 
+void GLWidget::countVerticesEdges() {
+  if (this->data != nullptr) {
+    this->numVertices = this->data->matrix_3d->rows;
+    this->numEdges = 0;
+    for (uint32_t i = 0; i < data->polygons_count; i++) {
+      this->numEdges += data->polygons[i].count;
+    }
+  }
+}
+
 void GLWidget::parseFile() {
   if (this->data != nullptr) {
     s21_free_obj_struct(this->data);
@@ -38,6 +48,7 @@ void GLWidget::parseFile() {
   }
   s21_parse_obj_file(this->filename, this->data);
   this->setDimentionalValues();
+  this->countVerticesEdges();
 
   update();
 }
