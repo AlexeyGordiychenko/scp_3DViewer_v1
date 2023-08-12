@@ -24,14 +24,32 @@ void MainWindow::s21_openFile() {
   QString QString_filename = QFileDialog::getOpenFileName(
       this, tr("Open .obj file:"), "~/", tr("Obj Files (*.obj)"));
   ui->filePath->setText(QString_filename);
+  ui->openGLWidget->fileChanged = true;
 }
 
 void MainWindow::s21_renderFile() {
-  std::string std_filename = ui->filePath->text().toStdString();
-  ui->openGLWidget->setFilename((char *)std_filename.c_str());
-  ui->openGLWidget->parseFile();
-  ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
-  ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
+  if (ui->openGLWidget->fileChanged) {
+    std::string std_filename = ui->filePath->text().toStdString();
+    ui->openGLWidget->setFilename((char *)std_filename.c_str());
+    int res = ui->openGLWidget->parseFile();
+    if (res == S21_OK) {
+      ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
+      ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
+    } else {
+      QMessageBox messageBoxImage;
+      if (res == S21_MEM) {
+        messageBoxImage.information(0, "",
+                                    "Couldn't render the file, out of memory.");
+      } else if (res == S21_ERR) {
+        messageBoxImage.information(0, "",
+                                    "Corrupted file or incorrect format.");
+      }
+    }
+    ui->openGLWidget->fileChanged = false;
+  } else {
+    ui->openGLWidget->clearTransformations();
+    ui->openGLWidget->update();
+  }
 }
 
 void MainWindow::s21_projectionTypeChange(int idx) {

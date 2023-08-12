@@ -102,7 +102,7 @@ static void s21_free_polygons(s21_polygon_t *polygons, uint32_t count) {
 static int s21_adjust_f_value(int64_t *value, uint32_t v_count) {
   int res = S21_OK;
   if (*value < 0) (*value) += v_count + 1;
-  if (*value < 0 || *value > v_count) res = S21_ERR;
+  if (*value <= 0 || *value > v_count) res = S21_ERR;
   return res;
 }
 

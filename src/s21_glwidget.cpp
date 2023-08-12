@@ -5,7 +5,9 @@ GLWidget::~GLWidget() {
   free(this->data);
 }
 
-GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent) {}
+GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent) {
+  this->data = (s21_obj *)calloc(1, sizeof(s21_obj));
+}
 
 void GLWidget::setFilename(char *filename) { this->filename = filename; }
 
@@ -55,17 +57,23 @@ void GLWidget::countVerticesEdges() {
   }
 }
 
-void GLWidget::parseFile() {
-  if (this->data != nullptr) {
-    s21_free_obj_struct(this->data);
-  } else {
-    this->data = (s21_obj *)malloc(sizeof(s21_obj));
-  }
-  s21_parse_obj_file(this->filename, this->data);
-  this->setDimentionalValues();
-  this->countVerticesEdges();
+void GLWidget::clearTransformations() {
+  this->xRot = 0, this->yRot = 0, this->zRot = 0, this->xTrans = 0,
+  this->yTrans = 0, this->zoom = 1;
+}
 
-  update();
+int GLWidget::parseFile() {
+  if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);
+  this->isParsed = false;
+  this->clearTransformations();
+  int res = s21_parse_obj_file(this->filename, this->data);
+  if (res == S21_OK) {
+    this->isParsed = true;
+    this->setDimentionalValues();
+    this->countVerticesEdges();
+    update();
+  }
+  return res;
 }
 
 void GLWidget::initializeGL() {
@@ -85,7 +93,7 @@ void GLWidget::paintGL() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  if (this->data != nullptr) {
+  if (this->isParsed) {
     if (this->projectionType == PARALLEL) {
       glOrtho(-1.5, 1.5, -1.5, 1.5, -2, 1000);
     } else {
@@ -94,9 +102,9 @@ void GLWidget::paintGL() {
     }
     glScalef(this->zoom, this->zoom, this->zoom);
     glTranslatef(this->xTrans, this->yTrans, 0.0);
-    glRotatef(this->xRot / 4.0, 1.0, 0.0, 0.0);
-    glRotatef(this->yRot / 4.0, 0.0, 1.0, 0.0);
-    glRotatef(this->zRot / 4.0, 0.0, 0.0, 1.0);
+    glRotatef(this->xRot, 1.0, 0.0, 0.0);
+    glRotatef(this->yRot, 0.0, 1.0, 0.0);
+    glRotatef(this->zRot, 0.0, 0.0, 1.0);
 
     for (uint32_t i = 0; i < this->data->polygons_count; i++) {
       glBegin(GL_LINE_LOOP);

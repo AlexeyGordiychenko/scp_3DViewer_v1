@@ -1,9 +1,9 @@
 #ifndef S21_GLWIDGET_H
 #define S21_GLWIDGET_H
 
-//#define GL_SILENCE_DEPRECATION
-//#include <GL/gl.h>
-//#include <GL/glut.h>
+// #define GL_SILENCE_DEPRECATION
+// #include <GL/gl.h>
+// #include <GL/glut.h>
 
 #include <QOpenGLWidget>
 #include <QWidget>
@@ -21,12 +21,14 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   char *filename;
   uint32_t numVertices = 0, numEdges = 0;
+  bool isParsed = false, fileChanged = true;
   void setFilename(char *filename);
   void setProjectionType(int idx);
-  void parseFile();
+  int parseFile();
   void scale(double scale);
   void move(double x, double y, double z);
   void rotate(double angle_x, double angle_y, double angle_z);
+  void clearTransformations();
 
  private:
   ~GLWidget() override;
