@@ -22,6 +22,7 @@ void GLWidget::move(double x, double y, double z) {
 }
 
 void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
+  printf("%lf %lf %lf\n", angle_x, angle_y, angle_z);
   s21_rotation_by_ox(this->data->matrix_3d, angle_x);
   s21_rotation_by_oy(this->data->matrix_3d, angle_y);
   s21_rotation_by_oz(this->data->matrix_3d, angle_z);
