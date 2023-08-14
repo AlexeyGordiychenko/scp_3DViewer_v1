@@ -37,7 +37,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
   s21_obj *data = NULL;
-  double** matrix_start = NULL;
+  double **matrix_start = NULL;
   QPointF lastMousePos;
   void setDimentionalValues();
   void countVerticesEdges();

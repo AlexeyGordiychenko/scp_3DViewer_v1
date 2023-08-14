@@ -1,6 +1,9 @@
 #include "s21_glwidget.h"
 
 GLWidget::~GLWidget() {
+  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++)
+    free(matrix_start[i]);
+  free(matrix_start);
   s21_free_obj_struct(this->data);
   free(this->data);
 }
@@ -15,7 +18,14 @@ void GLWidget::setProjectionType(int projectionType) {
   this->projectionType = projectionType;
 }
 
-void GLWidget::scale(double k) { s21_scale(this->data->matrix_3d, k); }
+void GLWidget::scale(double k) {
+  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+    for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
+      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
+    }
+  }
+  s21_scale(this->data->matrix_3d, k);
+}
 
 void GLWidget::move(double x, double y, double z) {
   s21_xyz_movement(this->data->matrix_3d, x, y, z);
@@ -25,6 +35,7 @@ void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
   s21_rotation_by_ox(this->data->matrix_3d, angle_x);
   s21_rotation_by_oy(this->data->matrix_3d, angle_y);
   s21_rotation_by_oz(this->data->matrix_3d, angle_z);
+  this->update();
 }
 
 void GLWidget::setDimentionalValues() {
@@ -60,12 +71,12 @@ void GLWidget::clearTransformations() {
 }
 
 void GLWidget::reset() {
-  this->data->matrix_3d->matrix = this->matrix_start;
-//  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-//    for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
-//      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
-//    }
-//  }
+  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+    for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
+      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
+    }
+  }
+  update();
 }
 
 int GLWidget::parseFile() {
@@ -74,15 +85,17 @@ int GLWidget::parseFile() {
   this->clearTransformations();
   int res = s21_parse_obj_file(this->filename, this->data);
   if (res == S21_OK) {
-    this->matrix_start = (double**)malloc(this->data->matrix_3d->rows * sizeof(double*));
+    this->matrix_start =
+        (double **)malloc(this->data->matrix_3d->rows * sizeof(double *));
     if (this->matrix_start != NULL) {
       for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-        this->matrix_start[i] = (double*)malloc(this->data->matrix_3d->cols * sizeof(double));
+        this->matrix_start[i] =
+            (double *)malloc(this->data->matrix_3d->cols * sizeof(double));
       }
-    }
-    for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-      for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
+      for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+        for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
           this->matrix_start[i][j] = this->data->matrix_3d->matrix[i][j];
+        }
       }
     }
     this->isParsed = true;

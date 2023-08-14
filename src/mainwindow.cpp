@@ -30,7 +30,7 @@ void MainWindow::s21_openFile() {
 
 void MainWindow::s21_reset() {
   ui->openGLWidget->reset();
-  ui->openGLWidget->update();
+  //  ui->openGLWidget->update();
 }
 
 void MainWindow::s21_renderFile() {
@@ -116,18 +116,8 @@ void MainWindow::s21_affine() {
   double rotate_y = (ui->rotate_y->value());
   double rotate_z = (ui->rotate_z->value());
   if (scale_k == 0) scale_k = 1;
-  if (scale_k_old == 0) scale_k_old = 1;
-  ui->openGLWidget->scale(scale_k / scale_k_old);
-  ui->openGLWidget->move(move_x - move_x_old, move_y - move_y_old, move_z - move_z_old);
-  ui->openGLWidget->rotate((rotate_x - rotate_x_old) * M_PI / 180,
-         (rotate_y - rotate_y_old) * M_PI / 180,
-         (rotate_z - rotate_z_old) * M_PI / 180);
-  ui->openGLWidget->update();
-  scale_k_old = scale_k;
-  move_x_old = move_x;
-  move_y_old = move_y;
-  move_z_old = move_z;
-  rotate_x_old = rotate_x;
-  rotate_y_old = rotate_y;
-  rotate_z_old = rotate_z;
+  ui->openGLWidget->scale(scale_k);
+  ui->openGLWidget->move(move_x, move_y, move_z);
+  ui->openGLWidget->rotate((rotate_x)*M_PI / 180, (rotate_y)*M_PI / 180,
+                           (rotate_z)*M_PI / 180);
 }
