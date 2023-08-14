@@ -29,12 +29,7 @@ void MainWindow::s21_openFile() {
 }
 
 void MainWindow::s21_reset() {
-  if (!(ui->openGLWidget->isParsed)) {
-    s21_openFile();
-    s21_renderFile();
-  } else if (ui->openGLWidget->fileChanged)
-    s21_renderFile();
-  else {
+  if (ui->openGLWidget->isParsed && !ui->openGLWidget->fileChanged) {
     ui->openGLWidget->clearTransformations();
     ui->openGLWidget->reset();
     ui->openGLWidget->update();
@@ -116,12 +111,7 @@ void MainWindow::s21_getGIF() {
 }
 
 void MainWindow::s21_affine() {
-  if (!(ui->openGLWidget->isParsed)) {
-    s21_openFile();
-    s21_renderFile();
-  } else if (ui->openGLWidget->fileChanged)
-    s21_renderFile();
-  else {
+  if (ui->openGLWidget->isParsed && !ui->openGLWidget->fileChanged) {
     double move_x = (ui->move_on_x->value());
     double move_y = (ui->move_on_y->value());
     double move_z = (ui->move_on_z->value());
