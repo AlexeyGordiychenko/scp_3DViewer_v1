@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1093</width>
-    <height>613</height>
+    <height>610</height>
    </rect>
   </property>
   <property name="font">
@@ -61,6 +61,7 @@
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -84,6 +85,7 @@ QPushButton:pressed {
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -100,11 +102,14 @@ QPushButton:pressed {
       <x>2</x>
       <y>66</y>
       <width>750</width>
-      <height>491</height>
+      <height>590</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="QComboBox" name="projectionType">
@@ -120,6 +125,7 @@ QPushButton:pressed {
      <string notr="true">QComboBox {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -256,6 +262,7 @@ QPushButton:pressed {
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -279,6 +286,7 @@ QPushButton:pressed {
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -292,9 +300,9 @@ QPushButton:pressed {
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>970</x>
+      <x>948</x>
       <y>170</y>
-      <width>89</width>
+      <width>131</width>
       <height>26</height>
      </rect>
     </property>
@@ -302,6 +310,7 @@ QPushButton:pressed {
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 1px solid gray;
+  border-radius: 13px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -365,16 +374,17 @@ QPushButton:pressed {
    <widget class="QLabel" name="numVertices">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>970</x>
       <y>30</y>
-      <width>81</width>
-      <height>31</height>
+      <width>91</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">QLabel{
   background-color: rgb(192, 192, 192);
   border: 1px solid gray;
+  border-radius: 15px;
 }</string>
     </property>
     <property name="text">
@@ -384,16 +394,17 @@ QPushButton:pressed {
    <widget class="QLabel" name="numEdges">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>970</x>
       <y>70</y>
-      <width>81</width>
-      <height>31</height>
+      <width>91</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">QLabel{
   background-color: rgb(192, 192, 192);
   border: 1px solid gray;
+  border-radius: 15px;
 }</string>
     </property>
     <property name="text">
@@ -406,7 +417,7 @@ QPushButton:pressed {
       <x>790</x>
       <y>30</y>
       <width>131</width>
-      <height>31</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -424,7 +435,7 @@ QPushButton:pressed {
       <x>790</x>
       <y>70</y>
       <width>131</width>
-      <height>31</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -457,11 +468,10 @@ QPushButton:pressed {
      <string notr="true">QTabWidget {
   background-color: rgb(192, 192, 192);
   border: 1px solid gray;
-}
-</string>
+}</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -470,6 +480,9 @@ QPushButton:pressed {
      </size>
     </property>
     <widget class="QWidget" name="tab">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <attribute name="title">
       <string>Background style</string>
      </attribute>
@@ -782,6 +795,14 @@ QPushButton:pressed {
       <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+  background-color: rgb(230, 170, 100);
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="reset_model">
     <property name="geometry">
@@ -796,6 +817,7 @@ QPushButton:pressed {
      <string notr="true">QPushButton {
   background-color: rgb(192, 192, 192);
   border: 2px solid gray;
+  border-radius: 5px;
 }
 QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
