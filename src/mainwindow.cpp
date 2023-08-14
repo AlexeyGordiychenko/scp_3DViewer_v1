@@ -29,9 +29,13 @@ void MainWindow::s21_openFile() {
 }
 
 void MainWindow::s21_reset() {
-  ui->openGLWidget->clearTransformations();
-  ui->openGLWidget->reset();
-  ui->openGLWidget->update();
+  if (check_render == false)
+    s21_renderFile();
+  else {
+    ui->openGLWidget->clearTransformations();
+    ui->openGLWidget->reset();
+    ui->openGLWidget->update();
+  }
 }
 
 void MainWindow::s21_renderFile() {
@@ -42,6 +46,7 @@ void MainWindow::s21_renderFile() {
     if (res == S21_OK) {
       ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
       ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
+      check_render = true;
     } else {
       QMessageBox messageBoxImage;
       if (res == S21_MEM) {
@@ -51,6 +56,7 @@ void MainWindow::s21_renderFile() {
         messageBoxImage.information(0, "",
                                     "Corrupted file or incorrect format.");
       }
+      check_render = false;
     }
     ui->openGLWidget->fileChanged = false;
   } else {
@@ -109,17 +115,21 @@ void MainWindow::s21_getGIF() {
 }
 
 void MainWindow::s21_affine() {
-  double move_x = (ui->move_on_x->value());
-  double move_y = (ui->move_on_y->value());
-  double move_z = (ui->move_on_z->value());
-  double scale_k = (ui->scale_on_k->value());
-  double rotate_x = (ui->rotate_x->value());
-  double rotate_y = (ui->rotate_y->value());
-  double rotate_z = (ui->rotate_z->value());
-  if (scale_k == 0) scale_k = 1;
-  ui->openGLWidget->clearTransformations();
-  ui->openGLWidget->scale(scale_k);
-  ui->openGLWidget->move(move_x, move_y, move_z);
-  ui->openGLWidget->rotate((rotate_x)*M_PI / 180, (rotate_y)*M_PI / 180,
-                           (rotate_z)*M_PI / 180);
+  if (check_render == false)
+    s21_renderFile();
+  else {
+    double move_x = (ui->move_on_x->value());
+    double move_y = (ui->move_on_y->value());
+    double move_z = (ui->move_on_z->value());
+    double scale_k = (ui->scale_on_k->value());
+    double rotate_x = (ui->rotate_x->value());
+    double rotate_y = (ui->rotate_y->value());
+    double rotate_z = (ui->rotate_z->value());
+    if (scale_k == 0) scale_k = 1;
+    ui->openGLWidget->clearTransformations();
+    ui->openGLWidget->scale(scale_k);
+    ui->openGLWidget->move(move_x, move_y, move_z);
+    ui->openGLWidget->rotate((rotate_x)*M_PI / 180, (rotate_y)*M_PI / 180,
+                             (rotate_z)*M_PI / 180);
+  }
 }

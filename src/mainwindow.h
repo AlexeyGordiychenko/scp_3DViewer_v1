@@ -25,6 +25,7 @@ class MainWindow : public QMainWindow {
  private:
   Ui::MainWindow *ui;
   GifCreator *gifCreator;
+  bool check_render = false;
 
  private slots:
   void s21_openFile();
