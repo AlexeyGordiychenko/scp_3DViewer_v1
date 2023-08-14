@@ -29,8 +29,9 @@ void MainWindow::s21_openFile() {
 }
 
 void MainWindow::s21_reset() {
+  ui->openGLWidget->clearTransformations();
   ui->openGLWidget->reset();
-  //  ui->openGLWidget->update();
+  ui->openGLWidget->update();
 }
 
 void MainWindow::s21_renderFile() {
@@ -116,6 +117,7 @@ void MainWindow::s21_affine() {
   double rotate_y = (ui->rotate_y->value());
   double rotate_z = (ui->rotate_z->value());
   if (scale_k == 0) scale_k = 1;
+  ui->openGLWidget->clearTransformations();
   ui->openGLWidget->scale(scale_k);
   ui->openGLWidget->move(move_x, move_y, move_z);
   ui->openGLWidget->rotate((rotate_x)*M_PI / 180, (rotate_y)*M_PI / 180,

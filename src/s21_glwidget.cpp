@@ -76,7 +76,6 @@ void GLWidget::reset() {
       this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
     }
   }
-  update();
 }
 
 int GLWidget::parseFile() {
