@@ -28,6 +28,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void move(double x, double y, double z);
   void rotate(double angle_x, double angle_y, double angle_z);
   void clearTransformations();
+  void reset();
 
  private:
   ~GLWidget() override;
@@ -36,7 +37,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
   s21_obj *data = NULL;
-  s21_obj *data_original = NULL;
+  double** matrix_start = NULL;
   QPointF lastMousePos;
   void setDimentionalValues();
   void countVerticesEdges();

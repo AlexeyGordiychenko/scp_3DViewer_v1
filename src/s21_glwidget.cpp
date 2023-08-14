@@ -22,7 +22,6 @@ void GLWidget::move(double x, double y, double z) {
 }
 
 void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
-  printf("%lf %lf %lf\n", angle_x, angle_y, angle_z);
   s21_rotation_by_ox(this->data->matrix_3d, angle_x);
   s21_rotation_by_oy(this->data->matrix_3d, angle_y);
   s21_rotation_by_oz(this->data->matrix_3d, angle_z);
@@ -60,12 +59,32 @@ void GLWidget::clearTransformations() {
   this->yTrans = 0, this->zoom = 1;
 }
 
+void GLWidget::reset() {
+  this->data->matrix_3d->matrix = this->matrix_start;
+//  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+//    for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
+//      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
+//    }
+//  }
+}
+
 int GLWidget::parseFile() {
   if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);
   this->isParsed = false;
   this->clearTransformations();
   int res = s21_parse_obj_file(this->filename, this->data);
   if (res == S21_OK) {
+    this->matrix_start = (double**)malloc(this->data->matrix_3d->rows * sizeof(double*));
+    if (this->matrix_start != NULL) {
+      for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+        this->matrix_start[i] = (double*)malloc(this->data->matrix_3d->cols * sizeof(double));
+      }
+    }
+    for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+      for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
+          this->matrix_start[i][j] = this->data->matrix_3d->matrix[i][j];
+      }
+    }
     this->isParsed = true;
     this->setDimentionalValues();
     this->countVerticesEdges();

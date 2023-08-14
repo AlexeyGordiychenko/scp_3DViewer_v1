@@ -35,5 +35,6 @@ class MainWindow : public QMainWindow {
   void s21_takeScreenshot();
   void s21_getGIF();  
   void s21_affine();
+  void s21_reset();
 };
 #endif  // MAINWINDOW_H

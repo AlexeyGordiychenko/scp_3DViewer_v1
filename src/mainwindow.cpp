@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
           SLOT(s21_takeScreenshot()));
   connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(s21_getGIF()));
   connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(s21_affine()));
+  connect(ui->reset_model, SIGNAL(clicked()), this, SLOT(s21_reset()));
 
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
@@ -25,6 +26,11 @@ void MainWindow::s21_openFile() {
       this, tr("Open .obj file:"), "~/", tr("Obj Files (*.obj)"));
   ui->filePath->setText(QString_filename);
   ui->openGLWidget->fileChanged = true;
+}
+
+void MainWindow::s21_reset() {
+  ui->openGLWidget->reset();
+  ui->openGLWidget->update();
 }
 
 void MainWindow::s21_renderFile() {
