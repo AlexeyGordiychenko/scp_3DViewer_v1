@@ -29,7 +29,10 @@ void MainWindow::s21_openFile() {
 }
 
 void MainWindow::s21_reset() {
-  if (check_render == false)
+  if (!(ui->openGLWidget->isParsed)) {
+    s21_openFile();
+    s21_renderFile();
+  } else if (ui->openGLWidget->fileChanged)
     s21_renderFile();
   else {
     ui->openGLWidget->clearTransformations();
@@ -46,7 +49,6 @@ void MainWindow::s21_renderFile() {
     if (res == S21_OK) {
       ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
       ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
-      check_render = true;
     } else {
       QMessageBox messageBoxImage;
       if (res == S21_MEM) {
@@ -56,7 +58,6 @@ void MainWindow::s21_renderFile() {
         messageBoxImage.information(0, "",
                                     "Corrupted file or incorrect format.");
       }
-      check_render = false;
     }
     ui->openGLWidget->fileChanged = false;
   } else {
@@ -115,7 +116,10 @@ void MainWindow::s21_getGIF() {
 }
 
 void MainWindow::s21_affine() {
-  if (check_render == false)
+  if (!(ui->openGLWidget->isParsed)) {
+    s21_openFile();
+    s21_renderFile();
+  } else if (ui->openGLWidget->fileChanged)
     s21_renderFile();
   else {
     double move_x = (ui->move_on_x->value());
