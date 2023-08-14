@@ -35,4 +35,7 @@ void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle);
 void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle);
 void s21_scale(s21_matrix_t *dot_matrix, double k);
 
+int s21_copy_matrix(s21_matrix_t *from, s21_matrix_t **to);
+void s21_free_matrix(s21_matrix_t *matrix_3d);
+
 #endif  // S21_VIEWER_H

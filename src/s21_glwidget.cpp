@@ -1,9 +1,7 @@
 #include "s21_glwidget.h"
 
 GLWidget::~GLWidget() {
-  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++)
-    free(matrix_start[i]);
-  free(matrix_start);
+  s21_free_matrix(matrix_start);
   s21_free_obj_struct(this->data);
   free(this->data);
 }
@@ -21,7 +19,7 @@ void GLWidget::setProjectionType(int projectionType) {
 void GLWidget::scale(double k) {
   for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
     for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
-      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
+      this->data->matrix_3d->matrix[i][j] = this->matrix_start->matrix[i][j];
     }
   }
   s21_scale(this->data->matrix_3d, k);
@@ -73,7 +71,7 @@ void GLWidget::clearTransformations() {
 void GLWidget::reset() {
   for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
     for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
-      this->data->matrix_3d->matrix[i][j] = this->matrix_start[i][j];
+      this->data->matrix_3d->matrix[i][j] = this->matrix_start->matrix[i][j];
     }
   }
 }
@@ -84,23 +82,13 @@ int GLWidget::parseFile() {
   this->clearTransformations();
   int res = s21_parse_obj_file(this->filename, this->data);
   if (res == S21_OK) {
-    this->matrix_start =
-        (double **)malloc(this->data->matrix_3d->rows * sizeof(double *));
-    if (this->matrix_start != NULL) {
-      for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-        this->matrix_start[i] =
-            (double *)malloc(this->data->matrix_3d->cols * sizeof(double));
-      }
-      for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-        for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
-          this->matrix_start[i][j] = this->data->matrix_3d->matrix[i][j];
-        }
-      }
+    res = s21_copy_matrix(this->data->matrix_3d, &this->matrix_start);
+    if (res == S21_OK) {
+      this->isParsed = true;
+      this->setDimentionalValues();
+      this->countVerticesEdges();
+      update();
     }
-    this->isParsed = true;
-    this->setDimentionalValues();
-    this->countVerticesEdges();
-    update();
   }
   return res;
 }

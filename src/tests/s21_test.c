@@ -175,6 +175,36 @@ START_TEST(viewer_tests_9) {
 }
 END_TEST
 
+START_TEST(viewer_tests_10) {
+  s21_matrix_t *m1 = malloc(sizeof(s21_matrix_t));
+  m1->rows = 2;
+  m1->cols = 3;
+  m1->matrix = malloc(m1->rows * sizeof(double *));
+  for (uint32_t i = 0; i < m1->rows; i++) {
+    m1->matrix[i] = malloc(m1->cols * sizeof(double));
+  }
+
+  // Assign values
+  m1->matrix[0][0] = 1;
+  m1->matrix[0][1] = 2;
+  m1->matrix[0][2] = 3;
+  m1->matrix[1][0] = 4;
+  m1->matrix[1][1] = 5;
+  m1->matrix[1][2] = 6;
+  s21_matrix_t *m2 = NULL;
+  s21_copy_matrix(m1, &m2);
+  ck_assert_int_eq(m2->rows, m1->rows);
+  ck_assert_int_eq(m2->cols, m1->cols);
+  for (uint32_t i = 0; i < m1->rows; i++) {
+    for (uint32_t j = 0; j < m1->cols; j++) {
+      ck_assert_int_eq(m1->matrix[i][j], m2->matrix[i][j]);
+    }
+  }
+  s21_free_matrix(m1);
+  s21_free_matrix(m2);
+}
+END_TEST
+
 Suite *s21_viewer_tests(void) {
   Suite *s1 = suite_create(PRE_TEST_HEADER "S21_VIEWER" POST_TEST_HEADER);
   TCase *tc1_1 = tcase_create("S21_VIEWER");
@@ -190,6 +220,7 @@ Suite *s21_viewer_tests(void) {
   tcase_add_test(tc1_1, viewer_tests_7);
   tcase_add_test(tc1_1, viewer_tests_8);
   tcase_add_test(tc1_1, viewer_tests_9);
+  tcase_add_test(tc1_1, viewer_tests_10);
 
   return s1;
 }

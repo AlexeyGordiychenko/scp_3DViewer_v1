@@ -78,7 +78,7 @@ static void s21_realloc_to_count(s21_obj **data, uint32_t v_count,
   }
 }
 
-static void s21_free_matrix(s21_matrix_t *matrix_3d) {
+void s21_free_matrix(s21_matrix_t *matrix_3d) {
   if (!matrix_3d) return;
   for (uint32_t i = 0; i < matrix_3d->rows; i++) {
     if (matrix_3d->matrix[i]) free(matrix_3d->matrix[i]);
@@ -231,4 +231,28 @@ void s21_free_obj_struct(s21_obj *data) {
   if (!data) return;
   s21_free_matrix(data->matrix_3d);
   s21_free_polygons(data->polygons, data->polygons_count);
+}
+
+int s21_copy_matrix(s21_matrix_t *from, s21_matrix_t **to) {
+  int res = S21_OK;
+  if (!from || !from->matrix) return S21_MEM;
+  if (*to) s21_free_matrix(*to);
+  *to = malloc(sizeof(s21_matrix_t));
+  if (!(*to)) return S21_MEM;
+  (*to)->matrix = malloc(sizeof(double *) * from->rows);
+  if (!(*to)->matrix) return S21_MEM;
+
+  (*to)->rows = from->rows;
+  (*to)->cols = from->cols;
+  for (uint32_t i = 0; i < from->rows && res == S21_OK; i++) {
+    (*to)->matrix[i] = malloc(sizeof(double) * from->cols);
+    if ((*to)->matrix[i]) {
+      for (uint32_t j = 0; j < from->cols; j++) {
+        (*to)->matrix[i][j] = from->matrix[i][j];
+      }
+    } else {
+      res = S21_MEM;
+    }
+  }
+  return res;
 }
