@@ -6,451 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1093</width>
-    <height>610</height>
+    <width>1123</width>
+    <height>700</height>
    </rect>
-  </property>
-  <property name="font">
-   <font>
-    <family>Ubuntu</family>
-    <italic>false</italic>
-    <bold>false</bold>
-   </font>
   </property>
   <property name="windowTitle">
    <string>3D_Viewer</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QMainWindow{
-  background-color: rgb(211, 211, 211);
-  border: 1px solid gray;
-}</string>
-  </property>
-  <property name="iconSize">
-   <size>
-    <width>24</width>
-    <height>10</height>
-   </size>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
    <widget class="QPushButton" name="openFile">
     <property name="geometry">
      <rect>
       <x>2</x>
       <y>2</y>
-      <width>123</width>
+      <width>128</width>
       <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
+   border: 2px solid gray;
+  border-radius: 8px;
 }</string>
     </property>
     <property name="text">
      <string>Open</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="renderFile">
-    <property name="geometry">
-     <rect>
-      <x>127</x>
-      <y>2</y>
-      <width>123</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-    <property name="text">
-     <string>Render</string>
-    </property>
-   </widget>
-   <widget class="GLWidget" name="openGLWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>2</x>
-      <y>66</y>
-      <width>750</width>
-      <height>590</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="projectionType">
-    <property name="geometry">
-     <rect>
-      <x>502</x>
-      <y>2</y>
-      <width>123</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="scale_on_k">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>170</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-100.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>1.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="move_on_z">
-    <property name="geometry">
-     <rect>
-      <x>1020</x>
-      <y>230</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-100.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>1.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="move_on_x">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>230</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-100.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="move_on_y">
-    <property name="geometry">
-     <rect>
-      <x>945</x>
-      <y>230</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-100.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="rotate_x">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>200</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-1000.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>1000.990000000000009</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="getScreenshot">
-    <property name="geometry">
-     <rect>
-      <x>252</x>
-      <y>2</y>
-      <width>123</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-    <property name="text">
-     <string>Screenshot</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="getGIF">
-    <property name="geometry">
-     <rect>
-      <x>377</x>
-      <y>2</y>
-      <width>123</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-    <property name="text">
-     <string>GIF</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>948</x>
-      <y>170</y>
-      <width>131</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-  border-radius: 13px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-    <property name="text">
-     <string>OK</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="rotate_y">
-    <property name="geometry">
-     <rect>
-      <x>945</x>
-      <y>200</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-1000.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>1000.990000000000009</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="rotate_z">
-    <property name="geometry">
-     <rect>
-      <x>1020</x>
-      <y>200</y>
-      <width>65</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QDoubleSpinBox{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-}</string>
-    </property>
-    <property name="minimum">
-     <double>-1000.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>1000.990000000000009</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="numVertices">
-    <property name="geometry">
-     <rect>
-      <x>970</x>
-      <y>30</y>
-      <width>91</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-  border-radius: 15px;
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="numEdges">
-    <property name="geometry">
-     <rect>
-      <x>970</x>
-      <y>70</y>
-      <width>91</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(192, 192, 192);
-  border: 1px solid gray;
-  border-radius: 15px;
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="numVerticesText">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>30</y>
-      <width>131</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(211, 211, 211);
-}</string>
-    </property>
-    <property name="text">
-     <string>Number of vertices</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="numEdgesText">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>70</y>
-      <width>131</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(211, 211, 211);
-}</string>
-    </property>
-    <property name="text">
-     <string>Number of edges</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>754</x>
+      <x>784</x>
       <y>270</y>
       <width>337</width>
       <height>161</height>
@@ -462,16 +48,16 @@ QPushButton:pressed {
       <pointsize>8</pointsize>
       <italic>false</italic>
       <bold>true</bold>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QTabWidget {
-  background-color: rgb(192, 192, 192);
   border: 1px solid gray;
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -732,19 +318,342 @@ QPushButton:pressed {
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="numVerticesText_2">
+   <widget class="GLWidget" name="openGLWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>170</y>
-      <width>101</width>
+      <x>2</x>
+      <y>66</y>
+      <width>780</width>
+      <height>650</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="projectionType">
+    <property name="geometry">
+     <rect>
+      <x>262</x>
+      <y>2</y>
+      <width>128</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="scale_on_k">
+    <property name="geometry">
+     <rect>
+      <x>886</x>
+      <y>130</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="move_on_z">
+    <property name="geometry">
+     <rect>
+      <x>1044</x>
+      <y>190</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="move_on_x">
+    <property name="geometry">
+     <rect>
+      <x>886</x>
+      <y>190</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="move_on_y">
+    <property name="geometry">
+     <rect>
+      <x>965</x>
+      <y>190</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rotate_x">
+    <property name="geometry">
+     <rect>
+      <x>886</x>
+      <y>160</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.990000000000009</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="getScreenshot">
+    <property name="geometry">
+     <rect>
+      <x>392</x>
+      <y>2</y>
+      <width>128</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Screenshot</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="getGIF">
+    <property name="geometry">
+     <rect>
+      <x>522</x>
+      <y>2</y>
+      <width>128</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>GIF</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>130</y>
+      <width>121</width>
       <height>26</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(211, 211, 211);
+     <string notr="true">QPushButton {
+   border: 2px solid gray;
+  border-radius: 6px;
 }</string>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rotate_y">
+    <property name="geometry">
+     <rect>
+      <x>965</x>
+      <y>160</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.990000000000009</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rotate_z">
+    <property name="geometry">
+     <rect>
+      <x>1044</x>
+      <y>160</y>
+      <width>77</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.990000000000009</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numVertices">
+    <property name="geometry">
+     <rect>
+      <x>1000</x>
+      <y>20</y>
+      <width>81</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numEdges">
+    <property name="geometry">
+     <rect>
+      <x>1000</x>
+      <y>60</y>
+      <width>81</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numVerticesText">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>20</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number of vertices</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numEdgesText">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>60</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number of edges</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reset_model">
+    <property name="geometry">
+     <rect>
+      <x>652</x>
+      <y>2</y>
+      <width>128</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Reset_model</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="filePath">
+    <property name="geometry">
+     <rect>
+      <x>2</x>
+      <y>34</y>
+      <width>780</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="renderFile">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>2</y>
+      <width>128</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   border: 2px solid gray;
+  border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Render</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="scale_text">
+    <property name="geometry">
+     <rect>
+      <x>784</x>
+      <y>130</y>
+      <width>100</width>
+      <height>26</height>
+     </rect>
     </property>
     <property name="text">
      <string>Scale (k)</string>
@@ -753,79 +662,27 @@ QPushButton:pressed {
    <widget class="QLabel" name="rotate_text">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>200</y>
-      <width>101</width>
+      <x>784</x>
+      <y>160</y>
+      <width>100</width>
       <height>26</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(211, 211, 211);
-}</string>
     </property>
     <property name="text">
      <string>Rotate (x, y, z)</string>
     </property>
    </widget>
-   <widget class="QLabel" name="numVerticesText_4">
+   <widget class="QLabel" name="move_text">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>230</y>
-      <width>101</width>
+      <x>784</x>
+      <y>190</y>
+      <width>100</width>
       <height>26</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-  background-color: rgb(211, 211, 211);
-}</string>
-    </property>
     <property name="text">
      <string>Move (x, y, z)</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="filePath">
-    <property name="geometry">
-     <rect>
-      <x>2</x>
-      <y>34</y>
-      <width>750</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(230, 170, 100);
-  border: 1px solid gray;
-  border-radius: 10px;
-}
-</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="reset_model">
-    <property name="geometry">
-     <rect>
-      <x>627</x>
-      <y>2</y>
-      <width>123</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(192, 192, 192);
-  border: 2px solid gray;
-  border-radius: 5px;
-}
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #BEBEBE, stop: 1 #D7D7D7);
-}</string>
-    </property>
-    <property name="text">
-     <string>Reset model</string>
     </property>
    </widget>
   </widget>
@@ -834,15 +691,9 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1093</width>
+     <width>1123</width>
      <height>22</height>
     </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
