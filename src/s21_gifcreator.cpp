@@ -15,6 +15,7 @@ GifCreator::GifCreator(QOpenGLWidget *widget, const QString &outputGifPath,
 
 void GifCreator::createGif() {
   QImage firstFrame = widget->grabFramebuffer();
+  firstFrame = firstFrame.convertToFormat(QImage::Format_RGBA8888);
   gifAnim.GifBegin(&gifWriter, outputGifPath.toStdString().c_str(),
                    firstFrame.width(), firstFrame.height(), frameDelay);
   gifAnim.GifWriteFrame(&gifWriter, firstFrame.bits(), firstFrame.width(),
@@ -30,6 +31,7 @@ void GifCreator::captureFrame() {
   }
 
   QImage frame = widget->grabFramebuffer();
+  frame = frame.convertToFormat(QImage::Format_RGBA8888);
   gifAnim.GifWriteFrame(&gifWriter, frame.bits(), frame.width(), frame.height(),
                         frameDelay / 10);
   frameCount++;
