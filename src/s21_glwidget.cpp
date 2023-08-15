@@ -69,8 +69,6 @@ void GLWidget::clearTransformations() {
   this->yTrans = 0, this->zoom = 1;
 }
 
-void GLWidget::reset() { matrix_reset_to_start(); }
-
 int GLWidget::parseFile() {
   if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);
   this->isParsed = false;

@@ -31,7 +31,6 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void move(double x, double y, double z);
   void rotate(double angle_x, double angle_y, double angle_z);
   void clearTransformations();
-  void reset();
   double bg_red = 0, bg_green = 0, bg_blue = 0;
   double pol_red = 0, pol_green = 0, pol_blue = 0;
   double ver_red = 0, ver_green = 0, ver_blue = 0;

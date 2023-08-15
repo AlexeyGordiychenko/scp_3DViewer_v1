@@ -58,7 +58,7 @@ void MainWindow::s21_openFile() {
 void MainWindow::s21_reset() {
   if (ui->openGLWidget->isParsed && !ui->openGLWidget->fileChanged) {
     ui->openGLWidget->clearTransformations();
-    ui->openGLWidget->reset();
+    ui->openGLWidget->matrix_reset_to_start();
     ui->openGLWidget->update();
   }
 }
