@@ -20,16 +20,16 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
-public:
+ public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-private:
+ private:
   Ui::MainWindow *ui;
   GifCreator *gifCreator;
   QSettings *settings;
 
-private slots:
+ private slots:
   void s21_openFile();
   void s21_renderFile();
   void s21_projectionTypeChange(int idx);
@@ -52,4 +52,4 @@ private slots:
   void s21_loadSettings();
   void s21_setValuesOnButtons();
 };
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

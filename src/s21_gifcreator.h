@@ -12,17 +12,17 @@
 class GifCreator : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GifCreator(QOpenGLWidget *widget, const QString &outputGifPath, int fps = 10,
              int duration_sec = 5, QObject *parent = nullptr);
   void createGif();
   void endGif();
   ~GifCreator();
 
-private slots:
+ private slots:
   void captureFrame();
 
-private:
+ private:
   QOpenGLWidget *widget;
   QString outputGifPath;
   QTimer timer;
@@ -33,4 +33,4 @@ private:
   int frameDelay;
 };
 
-#endif // S21_GIFCREATOR_H
+#endif  // S21_GIFCREATOR_H
