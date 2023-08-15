@@ -48,6 +48,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   QPointF lastMousePos;
   void setDimentionalValues();
   void countVerticesEdges();
+  void translateToFromOrigin(int k);
 
  protected:
   // OPENGL

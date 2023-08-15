@@ -22,19 +22,45 @@ void GLWidget::matrix_reset_to_start() {
       this->data->matrix_3d->matrix[i][j] = this->matrix_start->matrix[i][j];
     }
   }
+  setDimentionalValues();
 }
 
-void GLWidget::scale(double k) { s21_scale(this->data->matrix_3d, k); }
+void GLWidget::translateToFromOrigin(int k) {
+  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
+    this->data->matrix_3d->matrix[i][0] += k * this->centerX;
+    this->data->matrix_3d->matrix[i][1] += k * this->centerY;
+    this->data->matrix_3d->matrix[i][2] += k * this->centerZ;
+  }
+}
+
+void GLWidget::scale(double k) {
+  if (k) {
+    translateToFromOrigin(-1);
+    s21_scale(this->data->matrix_3d, k);
+    translateToFromOrigin(1);
+  }
+}
 
 void GLWidget::move(double x, double y, double z) {
-  s21_xyz_movement(this->data->matrix_3d, x, y, z);
+  if (x || y || z) {
+    s21_xyz_movement(this->data->matrix_3d, x, y, z);
+    this->centerX += x;
+    this->centerY += y;
+    this->centerZ += z;
+    this->xTrans += x;
+    this->yTrans += y;
+  }
 }
 
 void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
-  s21_rotation_by_ox(this->data->matrix_3d, angle_x);
-  s21_rotation_by_oy(this->data->matrix_3d, angle_y);
-  s21_rotation_by_oz(this->data->matrix_3d, angle_z);
-  this->update();
+  if (angle_x || angle_y || angle_z) {
+    translateToFromOrigin(-1);
+    s21_rotation_by_ox(this->data->matrix_3d, angle_x);
+    s21_rotation_by_oy(this->data->matrix_3d, angle_y);
+    s21_rotation_by_oz(this->data->matrix_3d, angle_z);
+    translateToFromOrigin(1);
+    this->update();
+  }
 }
 
 void GLWidget::setDimentionalValues() {
