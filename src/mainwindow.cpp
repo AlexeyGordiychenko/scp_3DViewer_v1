@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(s21_getGIF()));
   connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(s21_affine()));
   connect(ui->reset_model, SIGNAL(clicked()), this, SLOT(s21_reset()));
+  connect(ui->reset_params, SIGNAL(clicked()), this, SLOT(s21_reset_params()));
   connect(ui->setBgColor, SIGNAL(clicked()), this,
           SLOT(s21_setBackgroundColor()));
   connect(ui->setPolygonColor, SIGNAL(clicked()), this,
@@ -135,6 +136,16 @@ void MainWindow::s21_getGIF() {
     GifCreator *gifCreator = new GifCreator(ui->openGLWidget, gifName);
     gifCreator->createGif();
   }
+}
+
+void MainWindow::s21_reset_params() {
+  ui->scale_on_k->setValue(1);
+  ui->move_on_x->setValue(0);
+  ui->move_on_y->setValue(0);
+  ui->move_on_z->setValue(0);
+  ui->rotate_x->setValue(0);
+  ui->rotate_y->setValue(0);
+  ui->rotate_z->setValue(0);
 }
 
 void MainWindow::s21_affine() {

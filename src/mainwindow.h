@@ -37,6 +37,7 @@ class MainWindow : public QMainWindow {
   void s21_getGIF();
   void s21_affine();
   void s21_reset();
+  void s21_reset_params();
   void s21_setBackgroundColor();
   void s21_setPolygonColor();
   void s21_solidPolygonType();
