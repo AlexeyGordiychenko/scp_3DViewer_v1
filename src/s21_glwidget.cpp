@@ -95,7 +95,6 @@ int GLWidget::parseFile() {
 
 void GLWidget::initializeGL() {
   initializeOpenGLFunctions();
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glEnable(GL_DEPTH_TEST);
 }
 
@@ -106,6 +105,7 @@ void GLWidget::resizeGL(int w, int h) {
 }
 
 void GLWidget::paintGL() {
+  glClearColor(bg_red, bg_green, bg_blue, 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -127,21 +127,30 @@ void GLWidget::paintGL() {
     glRotatef(this->zRot, 0.0, 0.0, 1.0);
 
     for (uint32_t i = 0; i < this->data->polygons_count; i++) {
-      glBegin(GL_LINE_LOOP);
-      glColor3f(0.0f, 1.0f, 0.0f);
-      for (uint32_t j = 0; j < this->data->polygons[i].count; j++) {
-        uint32_t vertex_index = this->data->polygons[i].vertexes[j];
-        glVertex3d((this->data->matrix_3d->matrix[vertex_index - 1][0] -
-                    this->centerX) *
-                       this->sizeCoefficient,
-                   (this->data->matrix_3d->matrix[vertex_index - 1][1] -
-                    this->centerY) *
-                       this->sizeCoefficient,
-                   (this->data->matrix_3d->matrix[vertex_index - 1][2] -
-                    this->centerZ) *
-                       this->sizeCoefficient);
+      if (this->edges_type == DASHED) {
+        glEnable(GL_LINE_STIPPLE);
+        glLineStipple(1, 0x00FF);
       }
+      if (this->edges_type == SOLID) {
+        glDisable(GL_LINE_STIPPLE);
+      }
+      glLineWidth(this->edges_thickness);
+      glColor3f(pol_red, pol_green, pol_blue);
+      glBegin(GL_LINE_LOOP);
+      setVertices(i);
       glEnd();
+      if (this->vertice_type != NONE) {
+        if (this->vertice_type == CIRCLE) {
+          glEnable(GL_POINT_SMOOTH);
+        } else {
+          glDisable(GL_POINT_SMOOTH);
+        }
+        glPointSize(this->vertice_size);
+        glColor3f(ver_red, ver_green, ver_blue);
+        glBegin(GL_POINTS);
+        setVertices(i);
+        glEnd();
+      }
     }
     glFlush();
   }
@@ -193,5 +202,18 @@ void GLWidget::wheelEvent(QWheelEvent *event) {
       this->zoom /= 1.1;
     }
     update();
+  }
+}
+
+void GLWidget::setVertices(uint32_t i) {
+  for (uint32_t j = 0; j < this->data->polygons[i].count; j++) {
+    uint32_t vertex_index = this->data->polygons[i].vertexes[j];
+    glVertex3d(
+        (this->data->matrix_3d->matrix[vertex_index - 1][0] - this->centerX) *
+            this->sizeCoefficient,
+        (this->data->matrix_3d->matrix[vertex_index - 1][1] - this->centerY) *
+            this->sizeCoefficient,
+        (this->data->matrix_3d->matrix[vertex_index - 1][2] - this->centerZ) *
+            this->sizeCoefficient);
   }
 }

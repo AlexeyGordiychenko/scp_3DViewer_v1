@@ -15,6 +15,8 @@ extern "C" {
 }
 
 enum s21_projectionType { PARALLEL, CENTRAL };
+enum s21_polygonType { SOLID, DASHED };
+enum s21_verticeType { NONE, CIRCLE, SQUARE };
 
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
@@ -29,11 +31,16 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void rotate(double angle_x, double angle_y, double angle_z);
   void clearTransformations();
   void reset();
+  double bg_red = 0, bg_green = 0, bg_blue = 0;
+  double pol_red = 0, pol_green = 0, pol_blue = 0;
+  double ver_red = 0, ver_green = 0, ver_blue = 0;
+  double edges_thickness = 1, vertice_size = 1;
+  int vertice_type = 0, projectionType = 0, edges_type = 0;
 
  private:
   ~GLWidget() override;
   char *filename;
-  int sizeH = 0, sizeW = 0, projectionType = 0;
+  int sizeH = 0, sizeW = 0;
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
   s21_obj *data = NULL;
@@ -50,6 +57,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void mousePressEvent(QMouseEvent *event) override;
   void mouseMoveEvent(QMouseEvent *event) override;
   void wheelEvent(QWheelEvent *event) override;
+  void setVertices(uint32_t i);
 };
 
 #endif
