@@ -3,10 +3,10 @@
 
 #include <s21_glwidget.h>
 
+#include <QColorDialog>
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <QColorDialog>
 #include <QSettings>
 
 #include "s21_gifcreator.h"

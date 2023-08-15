@@ -16,14 +16,15 @@ void GLWidget::setProjectionType(int projectionType) {
   this->projectionType = projectionType;
 }
 
-void GLWidget::scale(double k) {
+void GLWidget::matrix_reset_to_start() {
   for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
     for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
       this->data->matrix_3d->matrix[i][j] = this->matrix_start->matrix[i][j];
     }
   }
-  s21_scale(this->data->matrix_3d, k);
 }
+
+void GLWidget::scale(double k) { s21_scale(this->data->matrix_3d, k); }
 
 void GLWidget::move(double x, double y, double z) {
   s21_xyz_movement(this->data->matrix_3d, x, y, z);
@@ -68,13 +69,7 @@ void GLWidget::clearTransformations() {
   this->yTrans = 0, this->zoom = 1;
 }
 
-void GLWidget::reset() {
-  for (uint32_t i = 0; i < this->data->matrix_3d->rows; i++) {
-    for (uint32_t j = 0; j < this->data->matrix_3d->cols; j++) {
-      this->data->matrix_3d->matrix[i][j] = this->matrix_start->matrix[i][j];
-    }
-  }
-}
+void GLWidget::reset() { matrix_reset_to_start(); }
 
 int GLWidget::parseFile() {
   if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);

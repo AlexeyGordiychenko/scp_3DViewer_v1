@@ -26,6 +26,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void setFilename(char *filename);
   void setProjectionType(int idx);
   int parseFile();
+  void matrix_reset_to_start();
   void scale(double scale);
   void move(double x, double y, double z);
   void rotate(double angle_x, double angle_y, double angle_z);
