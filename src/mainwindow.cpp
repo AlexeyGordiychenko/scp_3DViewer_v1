@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
 
+  ui->filePath->setReadOnly(true);
+
   settings = new QSettings("21school", "3DViewer_v1.0", this);
   s21_loadSettings();
   s21_setValuesOnButtons();
@@ -157,7 +159,8 @@ void MainWindow::s21_affine() {
     double rotate_x = (ui->rotate_x->value());
     double rotate_y = (ui->rotate_y->value());
     double rotate_z = (ui->rotate_z->value());
-    if (scale_k == 0) scale_k = 1;
+    if (scale_k == 0)
+      scale_k = 1;
     ui->openGLWidget->clearTransformations();
     ui->openGLWidget->matrix_reset_to_start();
     ui->openGLWidget->scale(scale_k);

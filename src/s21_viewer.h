@@ -22,7 +22,7 @@ typedef struct {
   uint32_t polygons_count;
   s21_polygon_t *polygons;
   s21_matrix_t *matrix_3d;
-  double viewbox[S21_MATRIX_COLS * 2];  // min_x, max_x...min_z, max_z
+  double viewbox[S21_MATRIX_COLS * 2]; // min_x, max_x...min_z, max_z
 } s21_obj;
 
 int s21_parse_obj_file(char *filename, s21_obj *data);
@@ -38,4 +38,4 @@ void s21_scale(s21_matrix_t *dot_matrix, double k);
 int s21_copy_matrix(s21_matrix_t *from, s21_matrix_t **to);
 void s21_free_matrix(s21_matrix_t *matrix_3d);
 
-#endif  // S21_VIEWER_H
+#endif // S21_VIEWER_H

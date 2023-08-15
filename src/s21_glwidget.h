@@ -19,7 +19,7 @@ enum s21_polygonType { SOLID, DASHED };
 enum s21_verticeType { NONE, CIRCLE, SQUARE };
 
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
- public:
+public:
   explicit GLWidget(QWidget *parent = Q_NULLPTR);
   uint32_t numVertices = 0, numEdges = 0;
   bool isParsed = false, fileChanged = true;
@@ -37,7 +37,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   double edges_thickness = 1, vertice_size = 1;
   int vertice_type = 0, projectionType = 0, edges_type = 0;
 
- private:
+private:
   ~GLWidget() override;
   char *filename;
   int sizeH = 0, sizeW = 0;
@@ -49,7 +49,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void setDimentionalValues();
   void countVerticesEdges();
 
- protected:
+protected:
   // OPENGL
   void initializeGL() override;
   void paintGL() override;

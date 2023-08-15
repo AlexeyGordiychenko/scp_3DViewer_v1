@@ -4,12 +4,8 @@ GifCreator::~GifCreator() {}
 
 GifCreator::GifCreator(QOpenGLWidget *widget, const QString &outputGifPath,
                        int fps, int duration_sec, QObject *parent)
-    : QObject(parent),
-      widget(widget),
-      outputGifPath(outputGifPath),
-      frameCount(0),
-      frameMax(fps * duration_sec),
-      frameDelay(1000 / fps) {
+    : QObject(parent), widget(widget), outputGifPath(outputGifPath),
+      frameCount(0), frameMax(fps * duration_sec), frameDelay(1000 / fps) {
   connect(&timer, &QTimer::timeout, this, &GifCreator::captureFrame);
 }
 

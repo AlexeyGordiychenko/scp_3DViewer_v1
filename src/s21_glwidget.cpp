@@ -70,7 +70,8 @@ void GLWidget::clearTransformations() {
 }
 
 int GLWidget::parseFile() {
-  if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);
+  if (this->fileChanged && this->isParsed)
+    s21_free_obj_struct(this->data);
   this->isParsed = false;
   this->clearTransformations();
   int res = s21_parse_obj_file(this->filename, this->data);
@@ -154,8 +155,10 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void normalizeAngle(double &angle) {
-  while (angle < 0) angle += 360 * 16;
-  while (angle > 360) angle -= 360 * 16;
+  while (angle < 0)
+    angle += 360 * 16;
+  while (angle > 360)
+    angle -= 360 * 16;
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
