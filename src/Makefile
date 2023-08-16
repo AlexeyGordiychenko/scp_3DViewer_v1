@@ -63,7 +63,7 @@ build:
 
 install: build
 	@mkdir -p $(INSTALL_DIR)
-	@cp $(BUILD_DIR)/$(PROGRAM)* $(INSTALL_DIR)/
+	@cp -r $(BUILD_DIR)/$(PROGRAM)* $(INSTALL_DIR)/
 
 uninstall:
 	rm -rf $(INSTALL_DIR)
