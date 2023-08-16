@@ -3,15 +3,16 @@
 GifCreator::~GifCreator() {}
 
 GifCreator::GifCreator(QOpenGLWidget *widget, const QString &outputGifPath,
-                       int fps, int duration_sec, QObject *parent)
+                       int width, int height, int fps, int duration_sec,
+                       QObject *parent)
     : QObject(parent),
       widget(widget),
       outputGifPath(outputGifPath),
       frameCount(0),
       frameMax(fps * duration_sec),
       frameDelay(1000 / fps),
-      width(widget->width() * widget->devicePixelRatio()),
-      height(widget->height() * widget->devicePixelRatio()) {
+      width(width),
+      height(height) {
   connect(&timer, &QTimer::timeout, this, &GifCreator::captureFrame);
 }
 
@@ -27,8 +28,10 @@ void GifCreator::captureFrame() {
     return;
   }
 
-  QImage frame =
-      widget->grabFramebuffer().convertToFormat(QImage::Format_RGBA8888);
+  QImage frame = widget->grabFramebuffer()
+                     .scaled(this->width, this->height, Qt::IgnoreAspectRatio,
+                             Qt::FastTransformation)
+                     .convertToFormat(QImage::Format_RGBA8888);
   gifAnim.GifWriteFrame(&gifWriter, frame.bits(), this->width, this->height,
                         frameDelay / 10);
   frameCount++;

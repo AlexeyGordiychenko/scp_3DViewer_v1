@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1156</width>
-    <height>680</height>
+    <width>1175</width>
+    <height>701</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,8 +41,8 @@
      <rect>
       <x>2</x>
       <y>68</y>
-      <width>780</width>
-      <height>581</height>
+      <width>800</width>
+      <height>600</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -172,8 +172,8 @@
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>796</x>
-      <y>481</y>
+      <x>816</x>
+      <y>499</y>
       <width>350</width>
       <height>170</height>
      </rect>
@@ -313,10 +313,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>796</x>
-      <y>345</y>
+      <x>816</x>
+      <y>360</y>
       <width>350</width>
-      <height>137</height>
+      <height>140</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -429,8 +429,8 @@
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
-      <x>796</x>
-      <y>293</y>
+      <x>816</x>
+      <y>308</y>
       <width>350</width>
       <height>53</height>
      </rect>
@@ -494,7 +494,7 @@
    <widget class="QFrame" name="frame_5">
     <property name="geometry">
      <rect>
-      <x>796</x>
+      <x>816</x>
       <y>68</y>
       <width>350</width>
       <height>71</height>
@@ -552,10 +552,10 @@
    <widget class="QFrame" name="frame_4">
     <property name="geometry">
      <rect>
-      <x>796</x>
+      <x>816</x>
       <y>138</y>
       <width>350</width>
-      <height>156</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -819,9 +819,9 @@
    <widget class="QLabel" name="labelProgName">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>816</x>
       <y>0</y>
-      <width>341</width>
+      <width>350</width>
       <height>41</height>
      </rect>
     </property>
@@ -846,9 +846,9 @@
    <widget class="QLabel" name="labelAuthors">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>816</x>
       <y>40</y>
-      <width>341</width>
+      <width>350</width>
       <height>20</height>
      </rect>
     </property>
@@ -889,7 +889,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1156</width>
+     <width>1175</width>
      <height>25</height>
     </rect>
    </property>

@@ -13,7 +13,8 @@ class GifCreator : public QObject {
   Q_OBJECT
 
  public:
-  GifCreator(QOpenGLWidget *widget, const QString &outputGifPath, int fps = 10,
+  GifCreator(QOpenGLWidget *widget, const QString &outputGifPath,
+             int width = 640, int height = 480, int fps = 10,
              int duration_sec = 5, QObject *parent = nullptr);
   void createGif();
   void endGif();
