@@ -9,18 +9,15 @@ GifCreator::GifCreator(QOpenGLWidget *widget, const QString &outputGifPath,
       outputGifPath(outputGifPath),
       frameCount(0),
       frameMax(fps * duration_sec),
-      frameDelay(1000 / fps) {
+      frameDelay(1000 / fps),
+      width(widget->width() * widget->devicePixelRatio()),
+      height(widget->height() * widget->devicePixelRatio()) {
   connect(&timer, &QTimer::timeout, this, &GifCreator::captureFrame);
 }
 
 void GifCreator::createGif() {
-  QImage firstFrame = widget->grabFramebuffer();
-  firstFrame = firstFrame.convertToFormat(QImage::Format_RGBA8888);
-  gifAnim.GifBegin(&gifWriter, outputGifPath.toStdString().c_str(),
-                   firstFrame.width(), firstFrame.height(), frameDelay);
-  gifAnim.GifWriteFrame(&gifWriter, firstFrame.bits(), firstFrame.width(),
-                        firstFrame.height(), frameDelay);
-  frameCount++;
+  gifAnim.GifBegin(&gifWriter, outputGifPath.toStdString().c_str(), this->width,
+                   this->height, frameDelay);
   timer.start(frameDelay);
 }
 
@@ -30,9 +27,9 @@ void GifCreator::captureFrame() {
     return;
   }
 
-  QImage frame = widget->grabFramebuffer();
-  frame = frame.convertToFormat(QImage::Format_RGBA8888);
-  gifAnim.GifWriteFrame(&gifWriter, frame.bits(), frame.width(), frame.height(),
+  QImage frame =
+      widget->grabFramebuffer().convertToFormat(QImage::Format_RGBA8888);
+  gifAnim.GifWriteFrame(&gifWriter, frame.bits(), this->width, this->height,
                         frameDelay / 10);
   frameCount++;
 }

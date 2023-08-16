@@ -31,6 +31,7 @@ class GifCreator : public QObject {
   int frameCount;
   int frameMax;
   int frameDelay;
+  uint32_t width, height;
 };
 
 #endif  // S21_GIFCREATOR_H
