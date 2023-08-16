@@ -38,9 +38,10 @@ static long s21_get_file_size(FILE *fp) {
 
 static void s21_skip_line(FILE *fp) {
   if (!feof(fp)) {
-    char *tmp = fp->_IO_read_ptr;
+    long pos_before = ftell(fp);
     fscanf(fp, "%*[^\n\r] ");
-    if (tmp == fp->_IO_read_ptr && !feof(fp)) {
+    long pos_after = ftell(fp);
+    if (pos_before == pos_after && !feof(fp)) {
       fseek(fp, 1, SEEK_CUR);
     }
   }
