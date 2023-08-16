@@ -9,6 +9,7 @@
  *
  */
 
+#include <inttypes.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -200,7 +201,7 @@ static int s21_parse_f(FILE *fp, uint32_t v_count, uint32_t *f_count,
   char term = 0;
   int res = S21_OK;
   while (res == S21_OK && !feof(fp) && term != '\n' && term != '\r' &&
-         fscanf(fp, "%ld%c", &value, &term) > 0) {
+         fscanf(fp, "%" PRId64 "%c", &value, &term) > 0) {
     if (count >= size) {
       size *= 2;
       uint32_t *tmp = realloc(vertexes, size * sizeof(uint32_t));
