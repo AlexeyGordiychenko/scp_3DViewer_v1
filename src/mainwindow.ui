@@ -816,6 +816,58 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>0</y>
+      <width>341</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <italic>true</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #19c257</string>
+    </property>
+    <property name="text">
+     <string>3D Viewer</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>40</y>
+      <width>341</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #19c257</string>
+    </property>
+    <property name="text">
+     <string>by elidacon, grapefru, reckonwi</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>frame_5</zorder>
    <zorder>openFile</zorder>
    <zorder>openGLWidget</zorder>
@@ -829,6 +881,8 @@
    <zorder>frame</zorder>
    <zorder>frame_3</zorder>
    <zorder>frame_4</zorder>
+   <zorder>label</zorder>
+   <zorder>label_5</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
