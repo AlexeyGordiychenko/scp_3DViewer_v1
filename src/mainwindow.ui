@@ -189,21 +189,21 @@
       <number>5</number>
      </property>
      <item row="1" column="3">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="labelVerticesColor">
        <property name="text">
         <string>Color:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="labelVerticesDisplay">
        <property name="text">
         <string>Display:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1" colspan="2">
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="labelVerticesSize">
        <property name="text">
         <string>Size:</string>
        </property>
@@ -239,7 +239,7 @@
       </widget>
      </item>
      <item row="0" column="0" colspan="4">
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="labelVerticesStyle">
        <property name="text">
         <string>Vertices style</string>
        </property>
@@ -330,7 +330,7 @@
       <number>5</number>
      </property>
      <item row="0" column="0" colspan="4">
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="labelPolygonStyle">
        <property name="text">
         <string>Polygons style</string>
        </property>
@@ -340,7 +340,7 @@
       </widget>
      </item>
      <item row="1" column="3">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="labelPolygonColor">
        <property name="text">
         <string>Color:</string>
        </property>
@@ -376,14 +376,14 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelPolygonLineType">
        <property name="text">
         <string>Line type:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1" colspan="2">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="labelPolygonThickness">
        <property name="text">
         <string>Thickness:</string>
        </property>
@@ -461,7 +461,7 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="labelBackgroundColor">
        <property name="text">
         <string>Background color</string>
        </property>
@@ -799,7 +799,7 @@
       </widget>
      </item>
      <item row="3" column="0" colspan="3">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="apply_params">
        <property name="styleSheet">
         <string notr="true">QPushButton {
    border: 2px solid gray;
@@ -816,7 +816,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelProgName">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -843,7 +843,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="labelAuthors">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -881,8 +881,8 @@
    <zorder>frame</zorder>
    <zorder>frame_3</zorder>
    <zorder>frame_4</zorder>
-   <zorder>label</zorder>
-   <zorder>label_5</zorder>
+   <zorder>labelProgName</zorder>
+   <zorder>labelAuthors</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -938,7 +938,7 @@
   <tabstop>move_on_x</tabstop>
   <tabstop>move_on_y</tabstop>
   <tabstop>move_on_z</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>apply_params</tabstop>
   <tabstop>reset_params</tabstop>
   <tabstop>setBgColor</tabstop>
   <tabstop>solidPolygonType</tabstop>

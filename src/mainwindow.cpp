@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->getScreenshot, SIGNAL(clicked()), this,
           SLOT(s21_takeScreenshot()));
   connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(s21_getGIF()));
-  connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(s21_affine()));
+  connect(ui->apply_params, SIGNAL(clicked()), this, SLOT(s21_affine()));
   connect(ui->reset_model, SIGNAL(clicked()), this, SLOT(s21_reset()));
   connect(ui->reset_params, SIGNAL(clicked()), this, SLOT(s21_reset_params()));
   connect(ui->setBgColor, SIGNAL(clicked()), this,
