@@ -166,6 +166,7 @@ void MainWindow::s21_affine() {
     ui->openGLWidget->move(move_x, move_y, move_z);
     ui->openGLWidget->rotate((rotate_x)*M_PI / 180, (rotate_y)*M_PI / 180,
                              (rotate_z)*M_PI / 180);
+    ui->openGLWidget->update();
   }
 }
 
