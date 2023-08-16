@@ -1,6 +1,26 @@
+/**
+ * @file s21_affine.c
+ * @brief Affine transformations of matrices
+ * @author grapefru
+ * @version 1
+ * @date 2023-08-16
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include <math.h>
 
 #include "s21_viewer.h"
+
+/**
+ * @brief Model shift along the X, Y, Z axes
+ *
+ * @param dot_matrix Vertex matrix
+ * @param ax X offset
+ * @param ay Y offset
+ * @param az Z offset
+ *
+ */
 
 void s21_xyz_movement(s21_matrix_t *dot_matrix, double ax, double ay,
                       double az) {
@@ -18,6 +38,13 @@ void s21_xyz_movement(s21_matrix_t *dot_matrix, double ax, double ay,
   }
 }
 
+/**
+ * @brief Rotation of the model around the X axis
+ *
+ * @param dot_matrix Vertex matrix
+ * @param angle Angle of rotation in radians
+ */
+
 void s21_rotation_by_ox(s21_matrix_t *dot_matrix, double angle) {
   if (angle) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
@@ -28,6 +55,13 @@ void s21_rotation_by_ox(s21_matrix_t *dot_matrix, double angle) {
     }
   }
 }
+
+/**
+ * @brief Rotation of the model around the Y axis
+ *
+ * @param dot_matrix Vertex matrix
+ * @param angle Angle of rotation in radians
+ */
 
 void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle) {
   if (angle) {
@@ -40,6 +74,13 @@ void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle) {
   }
 }
 
+/**
+ * @brief Rotation of the model around the Z axis
+ *
+ * @param dot_matrix Vertex matrix
+ * @param angle Angle of rotation in radians
+ */
+
 void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle) {
   if (angle) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
@@ -50,6 +91,13 @@ void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle) {
     }
   }
 }
+
+/**
+ * @brief Model scaling by a value
+ *
+ * @param dot_matrix Vertex matrix
+ * @param k Scale value
+ */
 
 void s21_scale(s21_matrix_t *dot_matrix, double k) {
   if (k) {

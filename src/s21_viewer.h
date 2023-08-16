@@ -7,10 +7,23 @@
 
 enum { S21_OK, S21_ERR, S21_MEM };
 
+/**
+ * @param vertexes Array of vertexes
+ * @param count Count polygons
+ *
+ */
+
 typedef struct {
   uint32_t *vertexes;
   uint32_t count;
 } s21_polygon_t;
+
+/**
+ * @param matrix Matrix of vertexes
+ * @param rows Count rows
+ * @param cols Count cols
+ *
+ */
 
 typedef struct {
   double **matrix;

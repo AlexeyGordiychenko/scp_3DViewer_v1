@@ -33,7 +33,7 @@ TEST=test
 TEST_BUILD=test_build
 
 # Docs
-DOC=doc_3DViewer
+DOC=doc
 
 .PHONY: all $(TEST) $(TEST_BUILD) build install uninstall gcov_report lcov_report dvi dist clean rebuild clang_n clang_i valgrind
 
@@ -84,8 +84,8 @@ lcov_report: $(TEST_BUILD)
 	open $(GCOV_DIR)/index.html
 
 dvi:
-	texi2dvi --clean --pdf $(DOC).texi
-	open $(DOC).pdf
+	cd $(DOC) && doxygen doxygen.conf
+	open $(DOC)/html/index.html
 
 dist:
 	mkdir -p $(PROGRAM)/src
@@ -94,7 +94,7 @@ dist:
 	rm -rf $(PROGRAM)/
 
 clean:
-	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(BUILD_DIR) $(TEST) $(LIB) $(DOC).pdf
+	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(BUILD_DIR) $(TEST) $(LIB) $(DOC)/html $(DOC)/latex
 
 rebuild: clean all
 

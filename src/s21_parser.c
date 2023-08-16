@@ -1,3 +1,14 @@
+/**
+ * @file s21_parser.c
+ * @brief Loading a 3D model into an object from a file
+ * @author elidacon
+ * @version 1
+ * @date 2023-08-16
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,12 +16,25 @@
 
 #include "s21_viewer.h"
 
+/**
+ * @brief File size calculation
+ *
+ * @param fp Obj File
+ * @return long File size in bytes
+ */
+
 static long s21_get_file_size(FILE *fp) {
   fseek(fp, 0, SEEK_END);
   long file_size = ftell(fp);
   fseek(fp, 0, SEEK_SET);
   return file_size;
 }
+
+/**
+ * @brief
+ *
+ * @param fp Obj File
+ */
 
 static void s21_skip_line(FILE *fp) {
   if (!feof(fp)) {
@@ -28,6 +52,13 @@ static bool s21_is_line_to_process(FILE *fp, char c) {
   return fscanf(fp, format, &tmp) == 1 && tmp == ' ';
 }
 
+/**
+ * @brief Сalculation of the minimum and maximum coordinates
+ *
+ * @param data Model structure
+ * @param count Number of vertices
+ */
+
 static void s21_calculate_min_max_coords(s21_obj *data, uint32_t v_count) {
   double *curr_row = data->matrix_3d->matrix[v_count - 1];
   if (data->viewbox[0] > curr_row[0]) data->viewbox[0] = curr_row[0];
@@ -37,6 +68,15 @@ static void s21_calculate_min_max_coords(s21_obj *data, uint32_t v_count) {
   if (data->viewbox[4] > curr_row[2]) data->viewbox[4] = curr_row[2];
   if (data->viewbox[5] < curr_row[2]) data->viewbox[5] = curr_row[2];
 }
+
+/**
+ * @brief Memory allocation by structure
+ *
+ * @param data Model structure
+ * @param v_size
+ * @param s_size
+ * @return int Error code
+ */
 
 static int s21_allocate_obj_struct(s21_obj **data, uint32_t v_size,
                                    uint32_t f_size) {
@@ -64,6 +104,14 @@ static int s21_allocate_obj_struct(s21_obj **data, uint32_t v_size,
   return res;
 }
 
+/**
+ * @brief Memory reallocation
+ *
+ * @param data Model structure
+ * @param v_count Number of vertices
+ * @param f_count Number of faces
+ */
+
 static void s21_realloc_to_count(s21_obj **data, uint32_t v_count,
                                  uint32_t f_count) {
   if (v_count != 0) {
@@ -78,6 +126,13 @@ static void s21_realloc_to_count(s21_obj **data, uint32_t v_count,
   }
 }
 
+/**
+ * @brief Freeing memory for the vertex matrix
+ *
+ * @param matrix_3d Vertex matrix
+
+ */
+
 void s21_free_matrix(s21_matrix_t *matrix_3d) {
   if (!matrix_3d) return;
   for (uint32_t i = 0; i < matrix_3d->rows; i++) {
@@ -89,6 +144,14 @@ void s21_free_matrix(s21_matrix_t *matrix_3d) {
   matrix_3d->cols = 0;
   free(matrix_3d);
 }
+
+/**
+ * @brief Freeing memory for an array of vertices
+ *
+ * @param polygons Vertex matrix
+ * @param count Count vertices
+
+ */
 
 static void s21_free_polygons(s21_polygon_t *polygons, uint32_t count) {
   if (!polygons) return;
@@ -105,6 +168,17 @@ static int s21_adjust_f_value(int64_t *value, uint32_t v_count) {
   if (*value <= 0 || *value > v_count) res = S21_ERR;
   return res;
 }
+
+/**
+ * @brief Parsing polygons in file
+ *
+ * @param fp Obj File
+ * @param v_count Count vertex
+ * @param f_count Count polygons
+ * @param f_size Count File size
+ * @param polygons Poligons Stucture
+ * @return int Error code
+ */
 
 static int s21_parse_f(FILE *fp, uint32_t v_count, uint32_t *f_count,
                        uint32_t *f_size, s21_polygon_t **polygons) {
@@ -153,6 +227,16 @@ static int s21_parse_f(FILE *fp, uint32_t v_count, uint32_t *f_count,
   return res;
 }
 
+/**
+ * @brief Parsing vertices in file
+ *
+ * @param fp Obj File
+ * @param v_count Count vertex
+ * @param f_size Count File size
+ * @param matrix Vertex matrix
+ * @return int Error code
+ */
+
 static int s21_parse_v(FILE *fp, uint32_t *v_count, uint32_t *v_size,
                        double ***matrix) {
   // realloc if we're out of bounds
@@ -185,6 +269,14 @@ static int s21_parse_v(FILE *fp, uint32_t *v_count, uint32_t *v_size,
 
   return res;
 }
+
+/**
+ * @brief Parsing Obj file
+ *
+ * @param filename The path to the file
+ * @param data Model structure
+ * @return int Error code
+ */
 
 int s21_parse_obj_file(char *filename, s21_obj *data) {
   FILE *fp = fopen(filename, "r");
@@ -227,11 +319,25 @@ int s21_parse_obj_file(char *filename, s21_obj *data) {
   return res;
 }
 
+/**
+ * @brief Free obj struct
+ *
+ * @param data Model structure
+ */
+
 void s21_free_obj_struct(s21_obj *data) {
   if (!data) return;
   s21_free_matrix(data->matrix_3d);
   s21_free_polygons(data->polygons, data->polygons_count);
 }
+
+/**
+ * @brief Matrix copy
+ *
+ * @param from Matrix input
+ * @param to Matrix output
+ * @return int Error code
+ */
 
 int s21_copy_matrix(s21_matrix_t *from, s21_matrix_t **to) {
   int res = S21_OK;
