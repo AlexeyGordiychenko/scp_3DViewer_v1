@@ -934,7 +934,13 @@
   <tabstop>scale_on_k</tabstop>
   <tabstop>rotate_x</tabstop>
   <tabstop>rotate_y</tabstop>
+  <tabstop>rotate_z</tabstop>
+  <tabstop>move_on_x</tabstop>
   <tabstop>move_on_y</tabstop>
+  <tabstop>move_on_z</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>reset_params</tabstop>
+  <tabstop>setBgColor</tabstop>
   <tabstop>solidPolygonType</tabstop>
   <tabstop>dashedPolygonType</tabstop>
   <tabstop>polygonThickness</tabstop>
