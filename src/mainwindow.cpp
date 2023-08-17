@@ -269,7 +269,11 @@ void MainWindow::s21_loadSettings() {
   ui->openGLWidget->bg_green = settings->value("bg_green").toDouble();
   ui->openGLWidget->bg_blue = settings->value("bg_blue").toDouble();
   ui->openGLWidget->pol_red = settings->value("pol_red").toDouble();
-  ui->openGLWidget->pol_green = settings->value("pol_green").toDouble();
+  if (settings->contains("pol_green")) {
+    ui->openGLWidget->pol_green = settings->value("pol_green").toDouble();
+  } else {
+    ui->openGLWidget->pol_green = 1;
+  }
   ui->openGLWidget->pol_blue = settings->value("pol_blue").toDouble();
   ui->openGLWidget->edges_type = settings->value("edges_type").toInt();
   ui->openGLWidget->edges_thickness =
@@ -278,7 +282,11 @@ void MainWindow::s21_loadSettings() {
   ui->openGLWidget->vertice_size = settings->value("vertice_size").toInt();
   ui->openGLWidget->ver_red = settings->value("ver_red").toDouble();
   ui->openGLWidget->ver_green = settings->value("ver_green").toDouble();
-  ui->openGLWidget->ver_blue = settings->value("ver_blue").toDouble();
+  if (settings->contains("ver_blue")) {
+    ui->openGLWidget->ver_blue = settings->value("ver_blue").toDouble();
+  } else {
+    ui->openGLWidget->ver_blue = 1;
+  }
   ui->openGLWidget->projectionType = settings->value("projectionType").toInt();
   ui->openGLWidget->update();
 }
