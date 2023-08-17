@@ -89,7 +89,7 @@ dvi:
 
 dist:
 	mkdir -p $(PROGRAM)/src
-	@cp Makefile *.c *.h *.pro *.cpp *.ui $(PROGRAM)/src 2>/dev/null || true
+	@cp -r Makefile *.c *.h *.pro *.cpp *.ui thirdparty/ $(PROGRAM)/src 2>/dev/null || true
 	tar cvzf $(PROGRAM).tgz $(PROGRAM)/
 	rm -rf $(PROGRAM)/
 
