@@ -1,5 +1,5 @@
-#ifndef S21_GLWIDGET_H
-#define S21_GLWIDGET_H
+#ifndef SCP_GLWIDGET_H
+#define SCP_GLWIDGET_H
 
 // #define GL_SILENCE_DEPRECATION
 // #include <GL/gl.h>
@@ -11,12 +11,12 @@
 #include <iostream>
 
 extern "C" {
-#include "s21_viewer.h"
+#include "scp_viewer.h"
 }
 
-enum s21_projectionType { PARALLEL, CENTRAL };
-enum s21_polygonType { SOLID, DASHED };
-enum s21_verticeType { NONE, CIRCLE, SQUARE };
+enum scp_projectionType { PARALLEL, CENTRAL };
+enum scp_polygonType { SOLID, DASHED };
+enum scp_verticeType { NONE, CIRCLE, SQUARE };
 
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
@@ -43,8 +43,8 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   int sizeH = 0, sizeW = 0;
   double centerX = 0, centerY = 0, centerZ = 0, sizeCoefficient = 0, xRot = 0,
          yRot = 0, zRot = 0, xTrans = 0, yTrans = 0, zoom = 1;
-  s21_obj *data = NULL;
-  s21_matrix_t *matrix_start = NULL;
+  scp_obj *data = NULL;
+  scp_matrix_t *matrix_start = NULL;
   QPointF lastMousePos;
   void setDimentionalValues();
   void countVerticesEdges();

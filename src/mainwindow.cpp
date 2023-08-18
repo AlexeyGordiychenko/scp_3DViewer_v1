@@ -5,35 +5,35 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  connect(ui->openFile, SIGNAL(clicked()), this, SLOT(s21_openFile()));
-  connect(ui->renderFile, SIGNAL(clicked()), this, SLOT(s21_renderFile()));
+  connect(ui->openFile, SIGNAL(clicked()), this, SLOT(scp_openFile()));
+  connect(ui->renderFile, SIGNAL(clicked()), this, SLOT(scp_renderFile()));
   connect(ui->projectionType, SIGNAL(currentIndexChanged(int)), this,
-          SLOT(s21_projectionTypeChange(int)));
+          SLOT(scp_projectionTypeChange(int)));
   connect(ui->getScreenshot, SIGNAL(clicked()), this,
-          SLOT(s21_takeScreenshot()));
-  connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(s21_getGIF()));
-  connect(ui->apply_params, SIGNAL(clicked()), this, SLOT(s21_affine()));
-  connect(ui->reset_model, SIGNAL(clicked()), this, SLOT(s21_reset()));
-  connect(ui->reset_params, SIGNAL(clicked()), this, SLOT(s21_reset_params()));
+          SLOT(scp_takeScreenshot()));
+  connect(ui->getGIF, SIGNAL(clicked()), this, SLOT(scp_getGIF()));
+  connect(ui->apply_params, SIGNAL(clicked()), this, SLOT(scp_affine()));
+  connect(ui->reset_model, SIGNAL(clicked()), this, SLOT(scp_reset()));
+  connect(ui->reset_params, SIGNAL(clicked()), this, SLOT(scp_reset_params()));
   connect(ui->setBgColor, SIGNAL(clicked()), this,
-          SLOT(s21_setBackgroundColor()));
+          SLOT(scp_setBackgroundColor()));
   connect(ui->setPolygonColor, SIGNAL(clicked()), this,
-          SLOT(s21_setPolygonColor()));
+          SLOT(scp_setPolygonColor()));
   connect(ui->solidPolygonType, SIGNAL(clicked()), this,
-          SLOT(s21_solidPolygonType()));
+          SLOT(scp_solidPolygonType()));
   connect(ui->dashedPolygonType, SIGNAL(clicked()), this,
-          SLOT(s21_dashedPolygonType()));
+          SLOT(scp_dashedPolygonType()));
   connect(ui->polygonThickness, SIGNAL(valueChanged(int)), this,
-          SLOT(s21_setPolygonThickness(int)));
-  connect(ui->noneVertice, SIGNAL(clicked()), this, SLOT(s21_setNoneVertice()));
+          SLOT(scp_setPolygonThickness(int)));
+  connect(ui->noneVertice, SIGNAL(clicked()), this, SLOT(scp_setNoneVertice()));
   connect(ui->circleVertice, SIGNAL(clicked()), this,
-          SLOT(s21_setCircleVertice()));
+          SLOT(scp_setCircleVertice()));
   connect(ui->squareVertice, SIGNAL(clicked()), this,
-          SLOT(s21_setSquareVertice()));
+          SLOT(scp_setSquareVertice()));
   connect(ui->sizeVertice, SIGNAL(valueChanged(int)), this,
-          SLOT(s21_setVerticeSize(int)));
+          SLOT(scp_setVerticeSize(int)));
   connect(ui->setVerticeColor, SIGNAL(clicked()), this,
-          SLOT(s21_setVerticeColor()));
+          SLOT(scp_setVerticeColor()));
 
   ui->projectionType->addItem("Parallel", PARALLEL);
   ui->projectionType->addItem("Central", CENTRAL);
@@ -41,24 +41,24 @@ MainWindow::MainWindow(QWidget *parent)
   ui->filePath->setReadOnly(true);
 
   settings = new QSettings("21school", "3DViewer_v1.0", this);
-  s21_loadSettings();
-  s21_setValuesOnButtons();
+  scp_loadSettings();
+  scp_setValuesOnButtons();
 }
 
 MainWindow::~MainWindow() {
-  s21_saveSettings();
+  scp_saveSettings();
   delete settings;
   delete ui;
 }
 
-void MainWindow::s21_openFile() {
+void MainWindow::scp_openFile() {
   QString QString_filename = QFileDialog::getOpenFileName(
       this, tr("Open .obj file:"), "~/", tr("Obj Files (*.obj)"));
   ui->filePath->setText(QString_filename);
   ui->openGLWidget->fileChanged = true;
 }
 
-void MainWindow::s21_reset() {
+void MainWindow::scp_reset() {
   if (ui->openGLWidget->isParsed && !ui->openGLWidget->fileChanged) {
     ui->openGLWidget->clearTransformations();
     ui->openGLWidget->matrix_reset_to_start();
@@ -66,20 +66,20 @@ void MainWindow::s21_reset() {
   }
 }
 
-void MainWindow::s21_renderFile() {
+void MainWindow::scp_renderFile() {
   if (ui->openGLWidget->fileChanged) {
     std::string std_filename = ui->filePath->text().toStdString();
     ui->openGLWidget->setFilename((char *)std_filename.c_str());
     int res = ui->openGLWidget->parseFile();
-    if (res == S21_OK) {
+    if (res == SCP_OK) {
       ui->numVertices->setText(QString::number(ui->openGLWidget->numVertices));
       ui->numEdges->setText(QString::number(ui->openGLWidget->numEdges));
     } else {
       QMessageBox messageBoxImage;
-      if (res == S21_MEM) {
+      if (res == SCP_MEM) {
         messageBoxImage.information(0, "",
                                     "Couldn't render the file, out of memory.");
-      } else if (res == S21_ERR) {
+      } else if (res == SCP_ERR) {
         messageBoxImage.information(0, "",
                                     "Corrupted file or incorrect format.");
       }
@@ -91,12 +91,12 @@ void MainWindow::s21_renderFile() {
   }
 }
 
-void MainWindow::s21_projectionTypeChange(int idx) {
+void MainWindow::scp_projectionTypeChange(int idx) {
   ui->openGLWidget->setProjectionType(idx);
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_takeScreenshot() {
+void MainWindow::scp_takeScreenshot() {
   const QString suffixJpeg = ".jpeg", suffixBmp = ".bmp",
                 filterJpeg = "JPEG Image (*." + suffixJpeg + ")",
                 filterBmp = "Bitmap Image (*." + suffixBmp + ")";
@@ -125,7 +125,7 @@ void MainWindow::s21_takeScreenshot() {
   }
 }
 
-void MainWindow::s21_getGIF() {
+void MainWindow::scp_getGIF() {
   const QString gifExt = ".gif";
   QFileInfo fileInfo(ui->filePath->text());
   QFileDialog saveGifDialog(this);
@@ -140,7 +140,7 @@ void MainWindow::s21_getGIF() {
   }
 }
 
-void MainWindow::s21_reset_params() {
+void MainWindow::scp_reset_params() {
   ui->scale_on_k->setValue(1);
   ui->move_on_x->setValue(0);
   ui->move_on_y->setValue(0);
@@ -150,7 +150,7 @@ void MainWindow::s21_reset_params() {
   ui->rotate_z->setValue(0);
 }
 
-void MainWindow::s21_affine() {
+void MainWindow::scp_affine() {
   if (ui->openGLWidget->isParsed && !ui->openGLWidget->fileChanged) {
     double move_x = (ui->move_on_x->value());
     double move_y = (ui->move_on_y->value());
@@ -170,7 +170,7 @@ void MainWindow::s21_affine() {
   }
 }
 
-void MainWindow::s21_setBackgroundColor() {
+void MainWindow::scp_setBackgroundColor() {
   QColor color = QColorDialog::getColor();
   if (color.isValid()) {
     ui->openGLWidget->bg_red = color.redF();
@@ -184,7 +184,7 @@ void MainWindow::s21_setBackgroundColor() {
   }
 }
 
-void MainWindow::s21_setPolygonColor() {
+void MainWindow::scp_setPolygonColor() {
   QColor color = QColorDialog::getColor();
   if (color.isValid()) {
     ui->openGLWidget->pol_red = color.redF();
@@ -198,42 +198,42 @@ void MainWindow::s21_setPolygonColor() {
   }
 }
 
-void MainWindow::s21_solidPolygonType() {
+void MainWindow::scp_solidPolygonType() {
   ui->openGLWidget->edges_type = SOLID;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_dashedPolygonType() {
+void MainWindow::scp_dashedPolygonType() {
   ui->openGLWidget->edges_type = DASHED;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setPolygonThickness(int value) {
+void MainWindow::scp_setPolygonThickness(int value) {
   ui->openGLWidget->edges_thickness = value / 10;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setNoneVertice() {
+void MainWindow::scp_setNoneVertice() {
   ui->openGLWidget->vertice_type = NONE;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setCircleVertice() {
+void MainWindow::scp_setCircleVertice() {
   ui->openGLWidget->vertice_type = CIRCLE;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setSquareVertice() {
+void MainWindow::scp_setSquareVertice() {
   ui->openGLWidget->vertice_type = SQUARE;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setVerticeSize(int value) {
+void MainWindow::scp_setVerticeSize(int value) {
   ui->openGLWidget->vertice_size = value / 5;
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setVerticeColor() {
+void MainWindow::scp_setVerticeColor() {
   QColor color = QColorDialog::getColor();
   if (color.isValid()) {
     ui->openGLWidget->ver_red = color.redF();
@@ -247,7 +247,7 @@ void MainWindow::s21_setVerticeColor() {
   }
 }
 
-void MainWindow::s21_saveSettings() {
+void MainWindow::scp_saveSettings() {
   settings->setValue("bg_red", ui->openGLWidget->bg_red);
   settings->setValue("bg_green", ui->openGLWidget->bg_green);
   settings->setValue("bg_blue", ui->openGLWidget->bg_blue);
@@ -264,7 +264,7 @@ void MainWindow::s21_saveSettings() {
   settings->setValue("projectionType", ui->openGLWidget->projectionType);
 }
 
-void MainWindow::s21_loadSettings() {
+void MainWindow::scp_loadSettings() {
   ui->openGLWidget->bg_red = settings->value("bg_red").toDouble();
   ui->openGLWidget->bg_green = settings->value("bg_green").toDouble();
   ui->openGLWidget->bg_blue = settings->value("bg_blue").toDouble();
@@ -291,7 +291,7 @@ void MainWindow::s21_loadSettings() {
   ui->openGLWidget->update();
 }
 
-void MainWindow::s21_setValuesOnButtons() {
+void MainWindow::scp_setValuesOnButtons() {
   char bg_color[40], pol_color[40], ver_color[40];
   sprintf(bg_color, "background-color: rgb(%d,%d,%d)",
           (int)(ui->openGLWidget->bg_red * 255),

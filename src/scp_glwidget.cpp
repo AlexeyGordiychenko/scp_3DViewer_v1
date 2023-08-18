@@ -1,13 +1,13 @@
-#include "s21_glwidget.h"
+#include "scp_glwidget.h"
 
 GLWidget::~GLWidget() {
-  s21_free_matrix(matrix_start);
-  s21_free_obj_struct(this->data);
+  scp_free_matrix(matrix_start);
+  scp_free_obj_struct(this->data);
   free(this->data);
 }
 
 GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent) {
-  this->data = (s21_obj *)calloc(1, sizeof(s21_obj));
+  this->data = (scp_obj *)calloc(1, sizeof(scp_obj));
 }
 
 void GLWidget::setFilename(char *filename) { this->filename = filename; }
@@ -36,14 +36,14 @@ void GLWidget::translateToFromOrigin(int k) {
 void GLWidget::scale(double k) {
   if (k) {
     translateToFromOrigin(-1);
-    s21_scale(this->data->matrix_3d, k);
+    scp_scale(this->data->matrix_3d, k);
     translateToFromOrigin(1);
   }
 }
 
 void GLWidget::move(double x, double y, double z) {
   if (x || y || z) {
-    s21_xyz_movement(this->data->matrix_3d, x, y, z);
+    scp_xyz_movement(this->data->matrix_3d, x, y, z);
     this->centerX += x;
     this->centerY += y;
     this->centerZ += z;
@@ -55,9 +55,9 @@ void GLWidget::move(double x, double y, double z) {
 void GLWidget::rotate(double angle_x, double angle_y, double angle_z) {
   if (angle_x || angle_y || angle_z) {
     translateToFromOrigin(-1);
-    s21_rotation_by_ox(this->data->matrix_3d, angle_x);
-    s21_rotation_by_oy(this->data->matrix_3d, angle_y);
-    s21_rotation_by_oz(this->data->matrix_3d, angle_z);
+    scp_rotation_by_ox(this->data->matrix_3d, angle_x);
+    scp_rotation_by_oy(this->data->matrix_3d, angle_y);
+    scp_rotation_by_oz(this->data->matrix_3d, angle_z);
     translateToFromOrigin(1);
     this->update();
   }
@@ -96,13 +96,13 @@ void GLWidget::clearTransformations() {
 }
 
 int GLWidget::parseFile() {
-  if (this->fileChanged && this->isParsed) s21_free_obj_struct(this->data);
+  if (this->fileChanged && this->isParsed) scp_free_obj_struct(this->data);
   this->isParsed = false;
   this->clearTransformations();
-  int res = s21_parse_obj_file(this->filename, this->data);
-  if (res == S21_OK) {
-    res = s21_copy_matrix(this->data->matrix_3d, &this->matrix_start);
-    if (res == S21_OK) {
+  int res = scp_parse_obj_file(this->filename, this->data);
+  if (res == SCP_OK) {
+    res = scp_copy_matrix(this->data->matrix_3d, &this->matrix_start);
+    if (res == SCP_OK) {
       this->isParsed = true;
       this->setDimentionalValues();
       this->countVerticesEdges();

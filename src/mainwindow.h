@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <s21_glwidget.h>
+#include <scp_glwidget.h>
 
 #include <QColorDialog>
 #include <QFileDialog>
@@ -9,7 +9,7 @@
 #include <QMessageBox>
 #include <QSettings>
 
-#include "s21_gifcreator.h"
+#include "scp_gifcreator.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,26 +30,26 @@ class MainWindow : public QMainWindow {
   QSettings *settings;
 
  private slots:
-  void s21_openFile();
-  void s21_renderFile();
-  void s21_projectionTypeChange(int idx);
-  void s21_takeScreenshot();
-  void s21_getGIF();
-  void s21_affine();
-  void s21_reset();
-  void s21_reset_params();
-  void s21_setBackgroundColor();
-  void s21_setPolygonColor();
-  void s21_solidPolygonType();
-  void s21_dashedPolygonType();
-  void s21_setPolygonThickness(int value);
-  void s21_setNoneVertice();
-  void s21_setCircleVertice();
-  void s21_setSquareVertice();
-  void s21_setVerticeSize(int value);
-  void s21_setVerticeColor();
-  void s21_saveSettings();
-  void s21_loadSettings();
-  void s21_setValuesOnButtons();
+  void scp_openFile();
+  void scp_renderFile();
+  void scp_projectionTypeChange(int idx);
+  void scp_takeScreenshot();
+  void scp_getGIF();
+  void scp_affine();
+  void scp_reset();
+  void scp_reset_params();
+  void scp_setBackgroundColor();
+  void scp_setPolygonColor();
+  void scp_solidPolygonType();
+  void scp_dashedPolygonType();
+  void scp_setPolygonThickness(int value);
+  void scp_setNoneVertice();
+  void scp_setCircleVertice();
+  void scp_setSquareVertice();
+  void scp_setVerticeSize(int value);
+  void scp_setVerticeColor();
+  void scp_saveSettings();
+  void scp_loadSettings();
+  void scp_setValuesOnButtons();
 };
 #endif  // MAINWINDOW_H

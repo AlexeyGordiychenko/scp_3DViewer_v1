@@ -1,8 +1,8 @@
-#include "s21_viewer_tests.h"
+#include "scp_viewer_tests.h"
 
 int main(void) {
   int failed = 0;
-  Suite *viewer_tests[] = {s21_viewer_tests(), NULL};
+  Suite *viewer_tests[] = {scp_viewer_tests(), NULL};
 
   for (int i = 0; viewer_tests[i] != NULL; i++) {
     SRunner *sr = srunner_create(viewer_tests[i]);

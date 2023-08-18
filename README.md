@@ -10,9 +10,9 @@ My part was to make
 
 So for my code you can check files
 + [Makefile](src/Makefile)
-+ [s21_parser.c](src/s21_parser.c), [s21_viewer.h](src/s21_viewer.h)
-+ most of the [glwidget.c](src/s21_glwidget.cpp), [glwidget.h](src/s21_glwidget.h)
-+ [s21_gifcreator.cpp](src/s21_gifcreator.cpp), [s21_gifcreator.h](src/s21_gifcreator.h)
++ [scp_parser.c](src/scp_parser.c), [scp_viewer.h](src/scp_viewer.h)
++ most of the [glwidget.c](src/scp_glwidget.cpp), [glwidget.h](src/scp_glwidget.h)
++ [scp_gifcreator.cpp](src/scp_gifcreator.cpp), [scp_gifcreator.h](src/scp_gifcreator.h)
 
 ## Score:
 The final score is 139% (max).

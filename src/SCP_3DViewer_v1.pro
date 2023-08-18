@@ -11,17 +11,17 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    s21_affine.c \
-    s21_gifcreator.cpp \
-    s21_glwidget.cpp \
-    s21_parser.c \
+    scp_affine.c \
+    scp_gifcreator.cpp \
+    scp_glwidget.cpp \
+    scp_parser.c \
     thirdparty/gifanim/gifanim.cpp
 
 HEADERS += \
     mainwindow.h \
-    s21_gifcreator.h \
-    s21_glwidget.h \
-    s21_viewer.h \
+    scp_gifcreator.h \
+    scp_glwidget.h \
+    scp_viewer.h \
     thirdparty/gifanim/gifanim.h
 
 FORMS += \

@@ -1,5 +1,5 @@
 /**
- * @file s21_affine.c
+ * @file scp_affine.c
  * @brief Affine transformations of matrices
  * @author grapefru
  * @version 1
@@ -10,7 +10,7 @@
  */
 #include <math.h>
 
-#include "s21_viewer.h"
+#include "scp_viewer.h"
 
 /**
  * @brief Model shift along the X, Y, Z axes
@@ -22,7 +22,7 @@
  *
  */
 
-void s21_xyz_movement(s21_matrix_t *dot_matrix, double ax, double ay,
+void scp_xyz_movement(scp_matrix_t *dot_matrix, double ax, double ay,
                       double az) {
   if (ax) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++)
@@ -45,7 +45,7 @@ void s21_xyz_movement(s21_matrix_t *dot_matrix, double ax, double ay,
  * @param angle Angle of rotation in radians
  */
 
-void s21_rotation_by_ox(s21_matrix_t *dot_matrix, double angle) {
+void scp_rotation_by_ox(scp_matrix_t *dot_matrix, double angle) {
   if (angle) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
       double temp_y = dot_matrix->matrix[i][1];
@@ -63,7 +63,7 @@ void s21_rotation_by_ox(s21_matrix_t *dot_matrix, double angle) {
  * @param angle Angle of rotation in radians
  */
 
-void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle) {
+void scp_rotation_by_oy(scp_matrix_t *dot_matrix, double angle) {
   if (angle) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
       double temp_x = dot_matrix->matrix[i][0];
@@ -81,7 +81,7 @@ void s21_rotation_by_oy(s21_matrix_t *dot_matrix, double angle) {
  * @param angle Angle of rotation in radians
  */
 
-void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle) {
+void scp_rotation_by_oz(scp_matrix_t *dot_matrix, double angle) {
   if (angle) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
       double temp_x = dot_matrix->matrix[i][0];
@@ -99,7 +99,7 @@ void s21_rotation_by_oz(s21_matrix_t *dot_matrix, double angle) {
  * @param k Scale value
  */
 
-void s21_scale(s21_matrix_t *dot_matrix, double k) {
+void scp_scale(scp_matrix_t *dot_matrix, double k) {
   if (k) {
     for (uint32_t i = 0; i < dot_matrix->rows; i++) {
       for (uint32_t j = 0; j < dot_matrix->cols; j++)

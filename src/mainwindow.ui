@@ -933,7 +933,7 @@
   <customwidget>
    <class>GLWidget</class>
    <extends>QWidget</extends>
-   <header>s21_glwidget.h</header>
+   <header>scp_glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,4 +1,4 @@
-#include "s21_gifcreator.h"
+#include "scp_gifcreator.h"
 
 GifCreator::~GifCreator() {}
 

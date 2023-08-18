@@ -1,16 +1,16 @@
-#ifndef S21_VIEWER_TESTS_H
-#define S21_VIEWER_TESTS_H
+#ifndef SCP_VIEWER_TESTS_H
+#define SCP_VIEWER_TESTS_H
 
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../s21_viewer.h"
+#include "../scp_viewer.h"
 
 // #define MAX_EXP_LEN 255
 #define PRE_TEST_HEADER "\033[33m**"
 #define POST_TEST_HEADER "**\033[0m"
 
-Suite *s21_viewer_tests(void);
+Suite *scp_viewer_tests(void);
 
-#endif  // S21_VIEWER_TESTS_H
+#endif  // SCP_VIEWER_TESTS_H

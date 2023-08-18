@@ -1,5 +1,5 @@
-#ifndef S21_GIFCREATOR_H
-#define S21_GIFCREATOR_H
+#ifndef SCP_GIFCREATOR_H
+#define SCP_GIFCREATOR_H
 
 #include <QImage>
 #include <QMessageBox>
@@ -35,4 +35,4 @@ class GifCreator : public QObject {
   uint32_t width, height;
 };
 
-#endif  // S21_GIFCREATOR_H
+#endif  // SCP_GIFCREATOR_H
