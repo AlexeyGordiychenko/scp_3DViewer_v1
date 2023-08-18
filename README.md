@@ -1,4 +1,25 @@
-# 3DViewer v1.0 (Group project)
+# 3DViewer v1.0 (Group project, 3 members)
+
+## My part of the project
+My part was to make
+   + Makefile
+   + parser
+   + render
+   + bonus 2 (screenshot and gif functions)
+   + help with the UI
+
+So for my code you can check files
++ [Makefile](src/Makefile)
++ [s21_parser.c](src/s21_parser.c), [s21_viewer.h](src/s21_viewer.h)
++ most of the [glwidget.c](src/s21_glwidget.cpp), [glwidget.h](src/s21_glwidget.h)
++ [s21_gifcreator.cpp](src/s21_gifcreator.cpp), [s21_gifcreator.h](src/s21_gifcreator.h)
+
+## Score:
+The final score is 139% (max).
+
+The 3DViewer was developed with frontend on QT 6.5.2 (C++) and backend on C.
+
+![3DViewer](misc/3DViewer.png)
 
 ## Task
 
